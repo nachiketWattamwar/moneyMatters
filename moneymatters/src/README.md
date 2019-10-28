@@ -2,4 +2,6 @@
 
 ## Usage
 
-Simply copy the files into your project, or one of the [example applications](https://github.com/mui-org/material-ui/tree/master/examples), and import and use the `Dashboard` component.
+Download sourcecode 
+Run npm start
+open localhost:3000
