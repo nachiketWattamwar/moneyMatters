@@ -19,17 +19,19 @@ app.use("/api", (req, res) => {
   res.send("1001");
 });
 
-app.get("/deleteExpense", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-
+app.post("/deleteExpense", (req, res) => {
   // Space.find({}, function(err, data) {
   //   console.log("==============data=========", data);
   //   res.send(data);
   // });
-  console.log("inside delete backend ", req);
+  console.log("inside delete backend ", req.body);
   res.send("from delete api");
 });
 
+app.post("/newExpense", (req, res) => {
+  console.log("inside newExpense backend ", req.body);
+  res.send("from expense api");
+});
 app.listen(3001, () =>
   console.log("Express server is running on localhost:3001")
 );
