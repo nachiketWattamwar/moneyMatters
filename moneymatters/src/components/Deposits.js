@@ -1,6 +1,6 @@
 /* eslint-disable no-script-url */
 import React, { useState, useEffect } from "react";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
@@ -35,7 +35,7 @@ const Deposits = ({ recentexpense, getRecentExpense }) => {
         on 15 March, 2019
       </Typography>
       <div>
-        <Link color='primary' href='javascript:;'>
+        <Link color='primary' to='/expenses'>
           View expenses
         </Link>
       </div>
@@ -47,7 +47,4 @@ const mapStateToProps = state => ({
   recentexpense: state.recentexpense
 });
 
-export default connect(
-  mapStateToProps,
-  { getRecentExpense }
-)(Deposits);
+export default connect(mapStateToProps, { getRecentExpense })(Deposits);

@@ -1,7 +1,8 @@
 /* eslint-disable no-script-url */
 
 import React from "react";
-import Link from "@material-ui/core/Link";
+//import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -54,7 +55,7 @@ export default function Orders() {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Link color='primary' href='javascript:;'>
+        <Link color='primary' to='/expenses'>
           See more expenses
         </Link>
       </div>

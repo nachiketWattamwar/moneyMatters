@@ -1,0 +1,28 @@
+
+.table
+{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.removeButton {
+    margin-left : 10%;
+    display: flex;
+    background-color: #008CBD;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}   
+
+#balance {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    margin-left: 70%;
+}
+
+
+
