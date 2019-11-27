@@ -7,7 +7,8 @@ import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
-
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 const data = [
   { id: 1, title: "Bargain", price: "$19", date: "12-12-12" },
   { id: 2, title: "safeywa", price: "$22", date: "12-12-12" }
@@ -50,6 +51,16 @@ const columns = [
   }
 ];
 
+const ColoredLine = ({ color }) => (
+  <hr
+    style={{
+      color: color,
+      backgroundColor: color,
+      height: 5
+    }}
+  />
+);
+
 export default class Test extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +82,7 @@ export default class Test extends Component {
 
   deleteSelectedExpense() {
     axios
-      .get(`http://localhost:3001/deleteExpense`, {
+      .post(`http://localhost:3001/deleteExpense`, {
         data: this.state.selectedRows
       })
       .then(res => {
@@ -96,7 +107,7 @@ export default class Test extends Component {
     };
 
     console.log("inside addexpnse", newExpense);
-    axios.post(`localhost:3001/newExpense`, { newExpense }).then(res => {
+    axios.post(`http://localhost:3001/newExpense`, { newExpense }).then(res => {
       console.log(res);
       console.log(res.data);
     });
@@ -123,7 +134,7 @@ export default class Test extends Component {
     console.log("state info is ", this.state);
     return (
       <div>
-        <h3> Total Expenses last month : ${this.state.totalExpense}</h3>
+        <h3>Recent Monthly Expense $1212</h3>
         <DataTable
           className='table'
           title='Total Expenses'
@@ -142,6 +153,7 @@ export default class Test extends Component {
         </div>
 
         <br />
+        <ColoredLine color='blue' />
         <br />
 
         <form noValidate autoComplete='off'>
