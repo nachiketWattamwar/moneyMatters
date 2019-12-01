@@ -24,7 +24,7 @@ app.post("/deleteExpense", (req, res) => {
   //   console.log("==============data=========", data);
   //   res.send(data);
   // });
-  console.log("inside delete backend ", req.body);
+  console.log("inside delete backend ", req.body.data);
   res.send("from delete api");
 });
 

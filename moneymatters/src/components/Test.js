@@ -7,11 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+
 const data = [
   { id: 1, title: "Bargain", price: "$19", date: "12-12-12" },
-  { id: 2, title: "safeywa", price: "$22", date: "12-12-12" }
+  { id: 2, title: "safeyway", price: "$22", date: "12-12-12" }
 ];
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
 const rowTheme = {
@@ -67,8 +66,8 @@ export default class Test extends Component {
     this.state = {
       totalExpense: 1212,
       initialDate: "Mon Nov 07 2019 17:17:00 GMT-0800",
-      expenseName: "Bargain",
-      price: 12,
+      expenseName: "Default",
+      price: 0,
       data: data,
       selectedRows: null
     };
@@ -102,7 +101,7 @@ export default class Test extends Component {
   addExpense() {
     const newExpense = {
       date: this.state.initialDate,
-      expenseName: this.state.expenseName,
+      title: this.state.expenseName,
       price: this.state.price
     };
 
