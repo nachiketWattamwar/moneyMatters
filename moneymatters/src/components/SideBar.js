@@ -33,7 +33,7 @@ class SideBar extends React.Component {
           <ListItemText primary='Expenses' />
         </ListItem>
 
-        <ListItem button>
+        <ListItem button component={Link} to='/detailFinances'>
           <ListItemIcon>
             <BarChartIcon />
           </ListItemIcon>
@@ -52,13 +52,13 @@ class SideBar extends React.Component {
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary='Last quarter' />
+          <ListItemText primary='Quarter' />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to='/goals'>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary='Year-end sale' />
+          <ListItemText primary='Financial Goals' />
         </ListItem>
       </div>
     );
