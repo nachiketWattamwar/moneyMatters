@@ -4,12 +4,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-
+import { Link } from "react-router-dom";
+import Test from "../components/Test";
 class SideBar extends React.Component {
   constructor(props) {
     super(props);
@@ -25,19 +26,14 @@ class SideBar extends React.Component {
           </ListItemIcon>
           <ListItemText primary='Dashboard' />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to='/expenses'>
           <ListItemIcon>
-            <ShoppingCartIcon />
+            <AccountBalanceWalletIcon />
           </ListItemIcon>
-          <ListItemText primary='Orders' />
+          <ListItemText primary='Expenses' />
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary='Customers' />
-        </ListItem>
-        <ListItem button>
+
+        <ListItem button component={Link} to='/detailFinances'>
           <ListItemIcon>
             <BarChartIcon />
           </ListItemIcon>
@@ -56,13 +52,13 @@ class SideBar extends React.Component {
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary='Last quarter' />
+          <ListItemText primary='Quarter' />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to='/goals'>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary='Year-end sale' />
+          <ListItemText primary='Financial Goals' />
         </ListItem>
       </div>
     );
