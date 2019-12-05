@@ -8,10 +8,6 @@ import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
 
-const data = [
-  { id: 1, title: "Bargain", price: "$19", date: "12-12-12" },
-  { id: 2, title: "safeyway", price: "$22", date: "12-12-12" }
-];
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
 const rowTheme = {
   rows: {
@@ -60,6 +56,11 @@ const ColoredLine = ({ color }) => (
   />
 );
 
+let data = [
+  { id: 1, title: "Bargain", price: "$19", date: "12-12-12" },
+  { id: 2, title: "safeway", price: "$22", date: "12-12-12" }
+];
+
 export default class Test extends Component {
   constructor(props) {
     super(props);
@@ -69,8 +70,10 @@ export default class Test extends Component {
       expenseName: "Default",
       price: 0,
       data: data,
-      selectedRows: null
+      selectedRows: null,
+      toggledClearRows: false
     };
+
     this.handleDateChange = this.handleDateChange.bind(this);
     this.getExpenseName = this.getExpenseName.bind(this);
     this.getPrice = this.getPrice.bind(this);
@@ -80,6 +83,19 @@ export default class Test extends Component {
   }
 
   deleteSelectedExpense() {
+    // this.setState({ toggledClearRows: !this.state.toggledClearRows})
+    console.log("inside deleteSeelceted expense", this.state.selectedRows);
+    const selectedIds = this.state.selectedRows.map(x => {
+      return x.id;
+    });
+
+    this.state.data.filter(x => {
+      if (selectedIds.includes(x.id)) {
+        console.log("inside if ", selectedIds);
+      }
+      return 1;
+    });
+
     axios
       .post(`http://localhost:3001/deleteExpense`, {
         data: this.state.selectedRows
@@ -99,12 +115,20 @@ export default class Test extends Component {
   }
 
   addExpense() {
+    const id = data.length + 1;
+
     const newExpense = {
-      date: this.state.initialDate,
+      id: id,
       title: this.state.expenseName,
-      price: this.state.price
+      price: this.state.price,
+      date: "12-11-11"
     };
 
+    data.push(newExpense);
+    console.log("data is ", data);
+    this.setState({
+      data: data
+    });
     console.log("inside addexpnse", newExpense);
     axios.post(`http://localhost:3001/newExpense`, { newExpense }).then(res => {
       console.log(res);
@@ -130,7 +154,7 @@ export default class Test extends Component {
   }
 
   render() {
-    console.log("state info is ", this.state);
+    console.log("state info is ", this.state.data);
     return (
       <div>
         <h3>Recent Monthly Expense $1212</h3>
@@ -138,9 +162,10 @@ export default class Test extends Component {
           className='table'
           title='Total Expenses'
           columns={columns}
-          data={data}
+          data={this.state.data}
           selectableRows
           onRowSelected={this.updateSelected}
+          clearSelectedRows={this.state.toggledClearedRows}
           customTheme={rowTheme}
           striped
           dense
