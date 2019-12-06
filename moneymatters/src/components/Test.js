@@ -57,8 +57,10 @@ const ColoredLine = ({ color }) => (
 );
 
 let data = [
-  { id: 1, title: "Bargain", price: "$19", date: "12-12-12" },
-  { id: 2, title: "safeway", price: "$22", date: "12-12-12" }
+  { id: 1, title: "Bargain", price: "$19", date: "09-11-19" },
+  { id: 2, title: "safeway", price: "$22", date: "03-10-19" },
+  { id: 3, title: "CVS", price: "$22", date: "14-09-19" },
+  { id: 4, title: "costco", price: "$220", date: "1-10-19" }
 ];
 
 export default class Test extends Component {
@@ -72,6 +74,7 @@ export default class Test extends Component {
       data: data,
       selectedRows: null,
       toggledClearRows: false
+      //updateRows: false
     };
 
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -83,17 +86,21 @@ export default class Test extends Component {
   }
 
   deleteSelectedExpense() {
-    // this.setState({ toggledClearRows: !this.state.toggledClearRows})
     console.log("inside deleteSeelceted expense", this.state.selectedRows);
     const selectedIds = this.state.selectedRows.map(x => {
       return x.id;
     });
 
-    this.state.data.filter(x => {
-      if (selectedIds.includes(x.id)) {
+    const newRows = this.state.data.filter(x => {
+      if (!selectedIds.includes(x.id)) {
         console.log("inside if ", selectedIds);
+        return x;
       }
-      return 1;
+    });
+    console.log("temp is ", newRows);
+    this.setState({
+      toggledClearRows: !this.state.toggledClearRows,
+      data: newRows
     });
 
     axios
@@ -126,9 +133,10 @@ export default class Test extends Component {
 
     data.push(newExpense);
     console.log("data is ", data);
-    this.setState({
-      data: data
-    });
+    // this.setState({
+    //   updateRows: !this.state.updateRows,
+    //   data: data
+    // });
     console.log("inside addexpnse", newExpense);
     axios.post(`http://localhost:3001/newExpense`, { newExpense }).then(res => {
       console.log(res);
@@ -166,6 +174,7 @@ export default class Test extends Component {
           selectableRows
           onRowSelected={this.updateSelected}
           clearSelectedRows={this.state.toggledClearedRows}
+          // onSelectedRowsChange={this.state.updateRows}
           customTheme={rowTheme}
           striped
           dense
