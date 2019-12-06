@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
+import styles from "../prototype.css";
 
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
 const rowTheme = {
@@ -24,9 +25,6 @@ const rowTheme = {
   }
 };
 const columns = [
-  // { title: "Expense", field: "expense" },
-  // { title: "Price", field: "price" },
-  // { title: "Date", field: "date" }
   {
     name: "Title",
     selector: "title",
@@ -58,9 +56,9 @@ const ColoredLine = ({ color }) => (
 
 let data = [
   { id: 1, title: "Bargain", price: "$19", date: "09-11-19" },
-  { id: 2, title: "safeway", price: "$22", date: "03-10-19" },
+  { id: 2, title: "Safeway", price: "$22", date: "03-10-19" },
   { id: 3, title: "CVS", price: "$22", date: "14-09-19" },
-  { id: 4, title: "costco", price: "$220", date: "1-10-19" }
+  { id: 4, title: "Costco", price: "$220", date: "1-10-19" }
 ];
 
 export default class Test extends Component {
@@ -68,7 +66,7 @@ export default class Test extends Component {
     super(props);
     this.state = {
       totalExpense: 1212,
-      initialDate: "Mon Nov 07 2019 17:17:00 GMT-0800",
+      initialDate: "Fri Dec 06 2019 17:17:00 GMT-0800",
       expenseName: "Default",
       price: 0,
       data: data,
@@ -164,8 +162,8 @@ export default class Test extends Component {
   render() {
     console.log("state info is ", this.state.data);
     return (
-      <div>
-        <h3>Recent Monthly Expense $1212</h3>
+      <div class="container-margins">
+        <h3 class="align-center">Recent Monthly Expense $1212</h3>
         <DataTable
           className='table'
           title='Total Expenses'
@@ -179,7 +177,9 @@ export default class Test extends Component {
           striped
           dense
         />
-        <div>
+        <div class="align-center">
+          <br></br>
+          <br></br>
           <Fab color='secondary' onClick={this.deleteSelectedExpense}>
             <DeleteRoundedIcon />
           </Fab>
@@ -189,27 +189,35 @@ export default class Test extends Component {
         <ColoredLine color='blue' />
         <br />
 
-        <form noValidate autoComplete='off'>
-          <TextField
-            id='outlined-basic'
-            label='Expense Name'
-            variant='outlined'
-            onChange={this.getExpenseName}
-          />
-          <TextField
-            id='outlined-basic'
-            label='Price'
-            variant='outlined'
-            onChange={this.getPrice}
-          />
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
-              value={this.state.initialDate}
-              onChange={this.handleDateChange}
+        <div class="align-center">
+          <form noValidate autoComplete='off'>
+            <TextField
+              margin="normal"
+              style={{ margin: 8 }}
+              id='outlined-basic'
+              label='Expense Name'
+              variant='outlined'
+              onChange={this.getExpenseName}
             />
-          </MuiPickersUtilsProvider>
-        </form>
-        <div>
+            <TextField
+              margin="normal"
+              style={{ margin: 8 }}
+              id='outlined-basic'
+              label='Price'
+              variant='outlined'
+              onChange={this.getPrice}
+            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                value={this.state.initialDate}
+                onChange={this.handleDateChange}
+              />
+            </MuiPickersUtilsProvider>
+          </form>
+        </div>
+        <div class="align-center">
+          <br></br>
+          <br></br>
           <Fab color='primary' aria-label='add' onClick={this.addExpense}>
             <AddIcon />
           </Fab>
