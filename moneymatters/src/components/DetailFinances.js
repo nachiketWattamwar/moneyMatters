@@ -51,9 +51,9 @@ const dataIncome = {
 export default class DetailFinances extends Component {
   render() {
     return (
-      <div>
+      <div style={divStyle}>
         <span style={spanStyle}>
-          <div style={divStyle}>
+          <div>
             <h2>Predictive expenses for next months</h2>
             <HorizontalBar data={dataHori} />
           </div>
