@@ -9,6 +9,7 @@
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "chart.js": "^2.8.0",
+    "concurrently": "^5.0.0",
     "cors": "^2.8.5",
     "date-fns": "^2.0.0-beta.5",
     "express": "^4.17.1",
@@ -32,7 +33,7 @@
     "styled-components": "^4.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \" react-scripts start\" \"node backend/index.js\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
