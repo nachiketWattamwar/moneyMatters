@@ -84,18 +84,15 @@ export default class Test extends Component {
   }
 
   deleteSelectedExpense() {
-    console.log("inside deleteSeelceted expense", this.state.selectedRows);
     const selectedIds = this.state.selectedRows.map(x => {
       return x.id;
     });
 
     const newRows = this.state.data.filter(x => {
       if (!selectedIds.includes(x.id)) {
-        console.log("inside if ", selectedIds);
         return x;
       }
     });
-    console.log("temp is ", newRows);
     this.setState({
       toggledClearRows: !this.state.toggledClearRows,
       data: newRows
@@ -112,8 +109,6 @@ export default class Test extends Component {
   }
 
   updateSelected(state) {
-    console.log("inside updated selected", state);
-
     this.setState({
       selectedRows: state.selectedRows
     });
@@ -130,12 +125,6 @@ export default class Test extends Component {
     };
 
     data.push(newExpense);
-    console.log("data is ", data);
-    // this.setState({
-    //   updateRows: !this.state.updateRows,
-    //   data: data
-    // });
-    console.log("inside addexpnse", newExpense);
     axios.post(`http://localhost:3001/newExpense`, { newExpense }).then(res => {
       console.log(res);
       console.log(res.data);
@@ -160,10 +149,9 @@ export default class Test extends Component {
   }
 
   render() {
-    console.log("state info is ", this.state.data);
     return (
-      <div class="container-margins">
-        <h3 class="align-center">Recent Monthly Expense $1212</h3>
+      <div class='container-margins'>
+        <h3 class='align-center'>Recent Monthly Expense $1212</h3>
         <DataTable
           className='table'
           title='Total Expenses'
@@ -177,7 +165,7 @@ export default class Test extends Component {
           striped
           dense
         />
-        <div class="align-center">
+        <div class='align-center'>
           <br></br>
           <br></br>
           <Fab color='secondary' onClick={this.deleteSelectedExpense}>
@@ -189,10 +177,10 @@ export default class Test extends Component {
         <ColoredLine color='blue' />
         <br />
 
-        <div class="align-center">
+        <div class='align-center'>
           <form noValidate autoComplete='off'>
             <TextField
-              margin="normal"
+              margin='normal'
               style={{ margin: 8 }}
               id='outlined-basic'
               label='Expense Name'
@@ -200,7 +188,7 @@ export default class Test extends Component {
               onChange={this.getExpenseName}
             />
             <TextField
-              margin="normal"
+              margin='normal'
               style={{ margin: 8 }}
               id='outlined-basic'
               label='Price'
@@ -215,7 +203,7 @@ export default class Test extends Component {
             </MuiPickersUtilsProvider>
           </form>
         </div>
-        <div class="align-center">
+        <div class='align-center'>
           <br></br>
           <br></br>
           <Fab color='primary' aria-label='add' onClick={this.addExpense}>

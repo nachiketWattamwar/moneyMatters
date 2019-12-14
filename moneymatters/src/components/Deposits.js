@@ -1,5 +1,5 @@
 /* eslint-disable no-script-url */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -13,9 +13,7 @@ const useStyles = makeStyles({
 });
 
 const Deposits = ({ recentexpense, getRecentExpense }) => {
-  // const [balance, setBalance] = useState(1212);
   useEffect(() => {
-    console.log("=======================inside useEffect()============");
     getRecentExpense();
   }, []);
   const classes = useStyles();
@@ -24,7 +22,6 @@ const Deposits = ({ recentexpense, getRecentExpense }) => {
     currency: "USD"
   });
 
-  console.log("=================inside deposit=============", recentexpense);
   return (
     <React.Fragment>
       <Title>Recent Expense</Title>
