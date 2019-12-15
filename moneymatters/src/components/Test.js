@@ -7,7 +7,6 @@ import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
-import styles from "../prototype.css";
 
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
 const rowTheme = {
