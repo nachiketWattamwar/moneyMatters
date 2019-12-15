@@ -32,6 +32,17 @@ app.post("/newExpense", (req, res) => {
   console.log("inside newExpense backend ", req.body);
   res.send("from expense api");
 });
+
+app.post("/login", (req, res) => {
+  console.log("inside login ", req.body);
+  res.send("from login api");
+});
+
+app.post("/signup", (req, res) => {
+  console.log("inside signup backend ", req.body);
+  res.send("from sgnup api");
+});
+
 app.listen(3001, () =>
   console.log("Express server is running on localhost:3001")
 );
