@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { mongoose } = require("../backend/db/mongoose");
-const { Space } = require("../backend/models/space");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,10 +19,6 @@ app.use("/api", (req, res) => {
 });
 
 app.post("/deleteExpense", (req, res) => {
-  // Space.find({}, function(err, data) {
-  //   console.log("==============data=========", data);
-  //   res.send(data);
-  // });
   console.log("inside delete backend ", req.body.data);
   res.send("from delete api");
 });
@@ -35,7 +30,11 @@ app.post("/newExpense", (req, res) => {
 
 app.post("/login", (req, res) => {
   console.log("inside login ", req.body);
-  res.send("from login api");
+  if (req.body.data.email === "admin") {
+    console.log("inside if");
+    res.send("true");
+  }
+  res.send("false");
 });
 
 app.post("/signup", (req, res) => {
