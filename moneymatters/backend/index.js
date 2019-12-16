@@ -14,6 +14,48 @@ app.use(function(req, res, next) {
   );
   next();
 });
+app.use("/recentFiveExpenses", (req, res) => {
+  const recentData = [
+    {
+      id: 0,
+      date: "16 Mar, 2019",
+      name: "Costco",
+      paymentMethod: "VISA ⠀•••• 3719",
+      amount: 312.44
+    },
+    {
+      id: 1,
+      date: "16 Mar, 2019",
+      name: "PG&E",
+      paymentMethod: "VISA ⠀•••• 2574",
+      amount: 866.99
+    },
+    {
+      id: 2,
+      date: "16 Mar, 2019",
+      name: "Gas",
+      paymentMethod: "MC ⠀•••• 1253",
+      amount: 100.81
+    },
+    {
+      id: 3,
+      date: "16 Mar, 2019",
+      name: "Medical Bills",
+      paymentMethod: "AMEX ⠀•••• 2000",
+      amount: 654.39
+    },
+    {
+      id: 4,
+      date: "15 Mar, 2019",
+      name: "Pet",
+      paymentMethod: "VISA ⠀•••• 5919",
+      amount: 212.79
+    }
+  ];
+
+  res.send(recentData);
+});
+
 app.use("/api", (req, res) => {
   res.send("1001");
 });

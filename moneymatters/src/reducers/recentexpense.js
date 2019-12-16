@@ -1,7 +1,7 @@
-import { GET_RECENT_EXPENSE } from "../actions/types";
+import { GET_RECENT_EXPENSE, GET_RECENT_EXPENSES_FIVE } from "../actions/types";
 
 const initialState = {
-  recentExpense: null
+  allData: null
 };
 
 export default function(state = initialState, action) {
@@ -12,6 +12,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         recentExpense: payload
+      };
+
+    case GET_RECENT_EXPENSES_FIVE:
+      return {
+        ...state,
+        recentExpensesFive: payload
       };
     default:
       return state;

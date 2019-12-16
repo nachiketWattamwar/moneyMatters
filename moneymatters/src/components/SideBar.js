@@ -40,14 +40,6 @@ class SideBar extends React.Component {
           <ListItemText primary='Reports' />
         </ListItem>
         <ListItem button></ListItem>
-
-        <ListSubheader inset>Saved reports</ListSubheader>
-        <ListItem button>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary='Current month' />
-        </ListItem>
         <ListItem button component={Link} to='/goals'>
           <ListItemIcon>
             <EmojiEventsIcon />
