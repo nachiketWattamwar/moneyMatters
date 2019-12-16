@@ -15,6 +15,7 @@ function App() {
       <BrowserRouter>
         <div>
           <Route path='/' exact component={Login} />
+          <Route path='/dashboard' exact component={Dashboard} />
           <Route path='/expenses' exact component={Test} />
           <Route path='/goals' exact component={Goals} />
           <Route path='/signup' exact component={Signup} />

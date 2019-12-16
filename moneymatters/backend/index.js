@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { mongoose } = require("../backend/db/mongoose");
-const { Space } = require("../backend/models/space");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,15 +14,53 @@ app.use(function(req, res, next) {
   );
   next();
 });
+app.use("/recentFiveExpenses", (req, res) => {
+  const recentData = [
+    {
+      id: 0,
+      date: "16 Mar, 2019",
+      name: "Costco Co.",
+      paymentMethod: "VISA ⠀•••• 3719",
+      amount: 312.44
+    },
+    {
+      id: 1,
+      date: "16 Mar, 2019",
+      name: "PG&E",
+      paymentMethod: "VISA ⠀•••• 2574",
+      amount: 866.99
+    },
+    {
+      id: 2,
+      date: "16 Mar, 2019",
+      name: "Gas",
+      paymentMethod: "MC ⠀•••• 1253",
+      amount: 100.81
+    },
+    {
+      id: 3,
+      date: "16 Mar, 2019",
+      name: "Medical Bills",
+      paymentMethod: "AMEX ⠀•••• 2000",
+      amount: 654.39
+    },
+    {
+      id: 4,
+      date: "15 Mar, 2019",
+      name: "Pet",
+      paymentMethod: "VISA ⠀•••• 5919",
+      amount: 212.79
+    }
+  ];
+
+  res.send(recentData);
+});
+
 app.use("/api", (req, res) => {
   res.send("1001");
 });
 
 app.post("/deleteExpense", (req, res) => {
-  // Space.find({}, function(err, data) {
-  //   console.log("==============data=========", data);
-  //   res.send(data);
-  // });
   console.log("inside delete backend ", req.body.data);
   res.send("from delete api");
 });
@@ -35,7 +72,11 @@ app.post("/newExpense", (req, res) => {
 
 app.post("/login", (req, res) => {
   console.log("inside login ", req.body);
-  res.send("from login api");
+  if (req.body.data.email === "admin") {
+    console.log("inside if");
+    res.send("true");
+  }
+  res.send("false");
 });
 
 app.post("/signup", (req, res) => {

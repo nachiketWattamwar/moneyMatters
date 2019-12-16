@@ -7,8 +7,10 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import CloseIcon from "@material-ui/icons/Close";
+import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import { Link } from "react-router-dom";
-import Test from "../components/Test";
+
 class SideBar extends React.Component {
   constructor(props) {
     super(props);
@@ -38,25 +40,17 @@ class SideBar extends React.Component {
           <ListItemText primary='Reports' />
         </ListItem>
         <ListItem button></ListItem>
-
-        <ListSubheader inset>Saved reports</ListSubheader>
-        <ListItem button>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary='Current month' />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <AssignmentIcon />
-          </ListItemIcon>
-          <ListItemText primary='Quarter' />
-        </ListItem>
         <ListItem button component={Link} to='/goals'>
           <ListItemIcon>
-            <AssignmentIcon />
+            <EmojiEventsIcon />
           </ListItemIcon>
           <ListItemText primary='Financial Goals' />
+        </ListItem>
+        <ListItem button component={Link} to='/'>
+          <ListItemIcon>
+            <CloseIcon />
+          </ListItemIcon>
+          <ListItemText primary='Logout' />
         </ListItem>
       </div>
     );

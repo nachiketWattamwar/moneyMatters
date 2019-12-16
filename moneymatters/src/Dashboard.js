@@ -15,6 +15,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MainContent from "./components/MainContent";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import CloseIcon from "@material-ui/icons/Close";
+import Icon from "@material-ui/core/Icon";
 
 function Copyright() {
   return (
@@ -113,6 +117,7 @@ const useStyles = makeStyles(theme => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [openSnackbar, setOpenSnackbar] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -120,8 +125,43 @@ export default function Dashboard() {
     setOpen(false);
   };
 
+  const handleClick = () => {
+    console.log("inside handleclick");
+    setOpenSnackbar(false);
+  };
+
   return (
     <div className={classes.root}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left"
+        }}
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={handleClick}
+      >
+        <SnackbarContent
+          className={clsx("success")}
+          aria-describedby='client-snackbar'
+          message={
+            <span id='client-snackbar'>
+              <Icon className={clsx(classes.icon, classes.iconVariant)} />
+              Logged in successfully!
+            </span>
+          }
+          action={[
+            <IconButton
+              key='close'
+              aria-label='close'
+              color='inherit'
+              onClick={handleClick}
+            >
+              <CloseIcon className={classes.icon} />
+            </IconButton>
+          ]}
+        />
+      </Snackbar>
       <CssBaseline />
       <AppBar
         position='absolute'
@@ -150,7 +190,7 @@ export default function Dashboard() {
             Dashboard
           </Typography>
           <IconButton color='inherit'>
-            <Badge badgeContent={4} color='secondary'>
+            <Badge badgeContent={5} color='secondary'>
               <NotificationsIcon />
             </Badge>
           </IconButton>
