@@ -19,7 +19,7 @@ app.use("/recentFiveExpenses", (req, res) => {
     {
       id: 0,
       date: "16 Mar, 2019",
-      name: "Costco",
+      name: "Costco Co.",
       paymentMethod: "VISA ⠀•••• 3719",
       amount: 312.44
     },

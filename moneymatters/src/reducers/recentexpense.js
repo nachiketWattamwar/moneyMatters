@@ -1,7 +1,8 @@
 import { GET_RECENT_EXPENSE, GET_RECENT_EXPENSES_FIVE } from "../actions/types";
 
 const initialState = {
-  allData: null
+  allData: null,
+  recentExpensesFive: []
 };
 
 export default function(state = initialState, action) {
@@ -15,6 +16,7 @@ export default function(state = initialState, action) {
       };
 
     case GET_RECENT_EXPENSES_FIVE:
+      // console.log("inside  reducer ", payload);
       return {
         ...state,
         recentExpensesFive: payload

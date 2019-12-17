@@ -147,7 +147,7 @@ export default function Dashboard() {
           message={
             <span id='client-snackbar'>
               <Icon className={clsx(classes.icon, classes.iconVariant)} />
-              Loggedin successfully!
+              Logged in successfully!
             </span>
           }
           action={[
