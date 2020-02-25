@@ -1,0 +1,17 @@
+.display {
+  background-color: blanchedalmond;
+  height: 30px;
+  width: 1300px;
+}
+
+.addExpenseCSS {
+  background-color: blanchedalmond;
+  align-content: center;
+  width: 1300px;
+  display: inline-flex;
+}
+
+.addButtonCSS {
+  padding-left: 600px;
+  background-color: blanchedalmond;
+}

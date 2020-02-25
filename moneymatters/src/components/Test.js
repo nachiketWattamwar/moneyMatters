@@ -7,6 +7,9 @@ import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
+import { blue, red } from "@material-ui/core/colors";
+import { bgcolor } from "@material-ui/system";
+import "../styles/mystyles.css";
 
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
 const rowTheme = {
@@ -150,7 +153,9 @@ export default class Test extends Component {
   render() {
     return (
       <div class='container-margins'>
-        <h3 class='align-center'>Recent Monthly Expense $1212</h3>
+        <div className='display'>
+          <h3 class='align-center'>Recent Monthly Expense $1212</h3>
+        </div>
         <DataTable
           className='table'
           title='Total Expenses'
@@ -176,7 +181,7 @@ export default class Test extends Component {
         <ColoredLine color='blue' />
         <br />
 
-        <div class='align-center'>
+        <div className='addExpenseCSS'>
           <form noValidate autoComplete='off'>
             <TextField
               margin='normal'
@@ -195,14 +200,11 @@ export default class Test extends Component {
               onChange={this.getPrice}
             />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                value={this.state.initialDate}
-                onChange={this.handleDateChange}
-              />
+              <DatePicker value={Date.now()} onChange={this.handleDateChange} />
             </MuiPickersUtilsProvider>
           </form>
         </div>
-        <div class='align-center'>
+        <div className='addButtonCSS'>
           <br></br>
           <br></br>
           <Fab color='primary' aria-label='add' onClick={this.addExpense}>

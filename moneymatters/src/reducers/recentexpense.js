@@ -7,16 +7,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-
   switch (type) {
     case GET_RECENT_EXPENSE:
       return {
         ...state,
         recentExpense: payload
       };
-
     case GET_RECENT_EXPENSES_FIVE:
-      // console.log("inside  reducer ", payload);
       return {
         ...state,
         recentExpensesFive: payload

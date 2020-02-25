@@ -12,17 +12,6 @@ import Title from "./Title";
 import { getRecentExpensesFive } from "../actions/recentexpense";
 import { connect } from "react-redux";
 
-// Generate Order Data
-function createData(id, date, name, paymentMethod, amount) {
-  return { id, date, name, paymentMethod, amount };
-}
-
-// const useStyles = theme => ({
-//   seeMore: {
-//     marginTop: 10
-//   }
-// });
-
 class Orders extends Component {
   constructor(props) {
     super(props);
@@ -31,16 +20,14 @@ class Orders extends Component {
     };
   }
   componentDidMount() {
-    console.log(" nachiket");
     this.props.getRecentExpensesFive();
   }
   render() {
     const { recentexpense } = this.props;
     let { rows } = this.state;
     rows = recentexpense.recentExpensesFive;
-    console.log("inside redux", recentexpense);
+    console.log("==================", rows);
     if (recentexpense.recentExpensesFive.length > 0) {
-      console.log("inside if ");
       return (
         <React.Fragment>
           <Title>Recent Expenses</Title>
@@ -64,7 +51,7 @@ class Orders extends Component {
               ))}
             </TableBody>
           </Table>
-          {/* className={classes.seeMore} */}
+
           <div>
             <Link color='primary' to='/expenses'>
               See more expenses
@@ -73,7 +60,7 @@ class Orders extends Component {
         </React.Fragment>
       );
     } else {
-      return <div></div>;
+      return <div>Loading</div>;
     }
   }
 }
