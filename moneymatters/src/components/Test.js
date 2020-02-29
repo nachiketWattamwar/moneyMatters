@@ -11,8 +11,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
 
 import "../scss/_mystyles.scss";
@@ -51,16 +49,6 @@ const columns = [
     right: true
   }
 ];
-
-const ColoredLine = ({ color }) => (
-  <hr
-    style={{
-      color: color,
-      backgroundColor: color,
-      height: 5
-    }}
-  />
-);
 
 let data = [
   { id: 1, title: "Bargain", price: "$19", date: "09-11-19" },
@@ -165,15 +153,6 @@ export default class Test extends Component {
         <div>
           <AppBar position='static'>
             <Toolbar>
-              <IconButton
-                edge='start'
-                className='menuButton'
-                color='inherit'
-                aria-label='menu'
-              >
-                <MenuIcon />
-              </IconButton>
-              {/* <SideBar /> */}
               <Typography variant='h6' className='title'>
                 Total Expenses
               </Typography>
@@ -183,7 +162,7 @@ export default class Test extends Component {
         </div>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper className='paper'>
+            <Paper elevation='10' className='paper'>
               <div className='totalExpensesTable'>
                 <DataTable
                   className='table'
@@ -216,7 +195,7 @@ export default class Test extends Component {
               alignItems='flex-start'
               spacing={1}
             >
-              <Paper className='paper'>
+              <Paper elevation='10' className='paper'>
                 <Grid item xs>
                   <Paper className='paper'>
                     <TextField
