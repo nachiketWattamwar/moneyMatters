@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
-import Orders from "./RecentExpenses";
+import RecentExpenses from "./RecentExpenses";
 
 const drawerWidth = 240;
 
@@ -108,10 +108,10 @@ export default function MainContent() {
               <Deposits />
             </Paper>
           </Grid>
-          {/* Recent Orders */}
+          {/* Recent Expenses */}
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Orders />
+              <RecentExpenses />
             </Paper>
           </Grid>
         </Grid>

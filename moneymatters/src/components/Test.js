@@ -6,10 +6,16 @@ import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import TextField from "@material-ui/core/TextField";
 import DateFnsUtils from "@date-io/date-fns"; // import
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
-import { blue, red } from "@material-ui/core/colors";
-import { bgcolor } from "@material-ui/system";
-import "../styles/mystyles.css";
+
+import "../scss/_mystyles.scss";
 
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
 const rowTheme = {
@@ -153,64 +159,113 @@ export default class Test extends Component {
   render() {
     return (
       <div class='container-margins'>
-        <div className='display'>
-          <h3 class='align-center'>Recent Monthly Expense $1212</h3>
-        </div>
-        <DataTable
-          className='table'
-          title='Total Expenses'
-          columns={columns}
-          data={this.state.data}
-          selectableRows
-          onRowSelected={this.updateSelected}
-          clearSelectedRows={this.state.toggledClearedRows}
-          // onSelectedRowsChange={this.state.updateRows}
-          customTheme={rowTheme}
-          striped
-          dense
-        />
-        <div class='align-center'>
-          <br></br>
-          <br></br>
-          <Fab color='secondary' onClick={this.deleteSelectedExpense}>
-            <DeleteRoundedIcon />
-          </Fab>
-        </div>
-
-        <br />
+        {/* <br />
         <ColoredLine color='blue' />
-        <br />
+        <br /> */}
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className='paper'>
+              <div className='display'>
+                {/* <h3 class='align-center'>Recent Monthly Expense $1212</h3> */}
+                <AppBar position='static'>
+                  <Toolbar>
+                    <IconButton
+                      edge='start'
+                      className='menuButton'
+                      color='inherit'
+                      aria-label='menu'
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                    {/* <SideBar /> */}
+                    <Typography variant='h6' className='title'>
+                      Total Expenses
+                    </Typography>
+                    {/* <Button color='inherit'>Login</Button> */}
+                  </Toolbar>
+                </AppBar>
+              </div>
+              <div className='totalExpensesTable'>
+                <DataTable
+                  className='table'
+                  columns={columns}
+                  data={this.state.data}
+                  selectableRows
+                  onRowSelected={this.updateSelected}
+                  clearSelectedRows={this.state.toggledClearedRows}
+                  // onSelectedRowsChange={this.state.updateRows}
+                  customTheme={rowTheme}
+                  striped
+                  dense
+                />
+              </div>
+              <div class='align-center'>
+                <br></br>
+                <br></br>
+                <Fab color='secondary' onClick={this.deleteSelectedExpense}>
+                  <DeleteRoundedIcon />
+                </Fab>
+              </div>
+            </Paper>
+          </Grid>
+          <div className='parentGrid'>
+            <Grid
+              container
+              direction='row'
+              justify='space-evenly'
+              alignItems='flex-start'
+              spacing={1}
+            >
+              <Paper className='paper'>
+                <Grid item xs>
+                  <Paper className='paper'>
+                    <TextField
+                      margin='normal'
+                      style={{ margin: 8 }}
+                      id='outlined-basic'
+                      label='Expense Name'
+                      variant='outlined'
+                      onChange={this.getExpenseName}
+                    />
+                  </Paper>
+                </Grid>
 
-        <div className='addExpenseCSS'>
-          <form noValidate autoComplete='off'>
-            <TextField
-              margin='normal'
-              style={{ margin: 8 }}
-              id='outlined-basic'
-              label='Expense Name'
-              variant='outlined'
-              onChange={this.getExpenseName}
-            />
-            <TextField
-              margin='normal'
-              style={{ margin: 8 }}
-              id='outlined-basic'
-              label='Price'
-              variant='outlined'
-              onChange={this.getPrice}
-            />
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker value={Date.now()} onChange={this.handleDateChange} />
-            </MuiPickersUtilsProvider>
-          </form>
-        </div>
-        <div className='addButtonCSS'>
-          <br></br>
-          <br></br>
-          <Fab color='primary' aria-label='add' onClick={this.addExpense}>
-            <AddIcon />
-          </Fab>
-        </div>
+                <Grid item xs>
+                  <Paper className='paper'>
+                    <TextField
+                      margin='normal'
+                      style={{ margin: 8 }}
+                      id='outlined-basic'
+                      label='Price'
+                      variant='outlined'
+                      onChange={this.getPrice}
+                    />
+                  </Paper>
+                </Grid>
+
+                <Grid item xs>
+                  <Paper className='paper'>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <DatePicker
+                        value={Date.now()}
+                        onChange={this.handleDateChange}
+                      />
+                    </MuiPickersUtilsProvider>
+                  </Paper>
+                </Grid>
+                <div className='addButtonCSS'>
+                  <Fab
+                    color='primary'
+                    aria-label='add'
+                    onClick={this.addExpense}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </div>
+              </Paper>
+            </Grid>
+          </div>
+        </Grid>
       </div>
     );
   }

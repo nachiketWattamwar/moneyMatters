@@ -26,7 +26,7 @@ class Orders extends Component {
     const { recentexpense } = this.props;
     let { rows } = this.state;
     rows = recentexpense.recentExpensesFive;
-    console.log("==================", rows);
+    //console.log("==================", rows);
     if (recentexpense.recentExpensesFive.length > 0) {
       return (
         <React.Fragment>

@@ -1,0 +1,40 @@
+.display {
+  background-color: blanchedalmond;
+  height: 30px;
+}
+
+.addExpenseCSS {
+  align-content: center;
+  width: 100%;
+  display: inline-block;
+}
+
+.addButtonCSS {
+  width: 100%;
+  padding-left: 110px;
+  margin: auto;
+  display: inline;
+}
+
+.menuButton {
+  margin-right: 20px;
+}
+
+.title {
+  flex-grow: 1;
+}
+
+.totalExpensesTable {
+  display: flex;
+  width: 90%;
+  align-content: center;
+}
+
+.paper {
+  padding: 5px;
+  margin: 20px;
+}
+
+.parentGrid {
+  flex-grow: 1;
+}
