@@ -162,29 +162,28 @@ export default class Test extends Component {
         {/* <br />
         <ColoredLine color='blue' />
         <br /> */}
+        <div>
+          <AppBar position='static'>
+            <Toolbar>
+              <IconButton
+                edge='start'
+                className='menuButton'
+                color='inherit'
+                aria-label='menu'
+              >
+                <MenuIcon />
+              </IconButton>
+              {/* <SideBar /> */}
+              <Typography variant='h6' className='title'>
+                Total Expenses
+              </Typography>
+              {/* <Button color='inherit'>Login</Button> */}
+            </Toolbar>
+          </AppBar>
+        </div>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className='paper'>
-              <div className='display'>
-                {/* <h3 class='align-center'>Recent Monthly Expense $1212</h3> */}
-                <AppBar position='static'>
-                  <Toolbar>
-                    <IconButton
-                      edge='start'
-                      className='menuButton'
-                      color='inherit'
-                      aria-label='menu'
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                    {/* <SideBar /> */}
-                    <Typography variant='h6' className='title'>
-                      Total Expenses
-                    </Typography>
-                    {/* <Button color='inherit'>Login</Button> */}
-                  </Toolbar>
-                </AppBar>
-              </div>
               <div className='totalExpensesTable'>
                 <DataTable
                   className='table'
@@ -208,6 +207,7 @@ export default class Test extends Component {
               </div>
             </Paper>
           </Grid>
+
           <div className='parentGrid'>
             <Grid
               container
