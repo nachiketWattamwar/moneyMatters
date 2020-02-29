@@ -1,11 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import Title from "./Title";
+import Title from "../components/Title";
 
 // Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
 
 export default function Chart() {
   const data = {
