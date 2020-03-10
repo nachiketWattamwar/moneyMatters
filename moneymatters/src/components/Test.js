@@ -73,6 +73,7 @@ export default class Test extends Component {
 
     this.handleDateChange = this.handleDateChange.bind(this);
     this.getExpenseName = this.getExpenseName.bind(this);
+    this.getPaymentType = this.getPaymentType.bind(this);
     this.getPrice = this.getPrice.bind(this);
     this.addExpense = this.addExpense.bind(this);
     this.updateSelected = this.updateSelected.bind(this);
@@ -138,6 +139,12 @@ export default class Test extends Component {
     }));
   }
 
+  getPaymentType(e) {
+    this.setState({
+      getPaymentType: e.target.value
+    });
+  }
+
   getExpenseName(e) {
     this.setState({
       expenseName: e.target.value
@@ -147,9 +154,6 @@ export default class Test extends Component {
   render() {
     return (
       <div class='container-margins'>
-        {/* <br />
-        <ColoredLine color='blue' />
-        <br /> */}
         <div>
           <AppBar position='static'>
             <Toolbar>
@@ -218,6 +222,19 @@ export default class Test extends Component {
                       label='Price'
                       variant='outlined'
                       onChange={this.getPrice}
+                    />
+                  </Paper>
+                </Grid>
+
+                <Grid item xs>
+                  <Paper className='paper'>
+                    <TextField
+                      margin='normal'
+                      style={{ margin: 8 }}
+                      id='outlined-basic'
+                      label='Payment Type'
+                      variant='outlined'
+                      onChange={this.getPaymentType}
                     />
                   </Paper>
                 </Grid>
