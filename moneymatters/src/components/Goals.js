@@ -4,11 +4,14 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import TextField from "@material-ui/core/TextField";
-import DateFnsUtils from "@date-io/date-fns"; 
-import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import axios from "axios";
-import styles from "../prototype.css";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
+import "../scss/_mystyles.scss";
 const rowTheme = {
   rows: {
     // spaced allows the following properties
@@ -36,7 +39,6 @@ const columns = [
     right: true
   },
   {
-
     name: "Deadline",
     selector: "deadline",
     sortable: true,
@@ -50,19 +52,21 @@ const columns = [
   }
 ];
 
-const ColoredLine = ({ color }) => (
-  <hr
-    style={{
-      color: color,
-      backgroundColor: color,
-      height: 5
-    }}
-  />
-);
-
 let data = [
-  { id: 1, title: "Save for buying a house", amount: "$100,000", deadline: "05-25-2020", category: "Housing" },
-  { id: 2, title: "John's college fund", amount: "$80,000", deadline: "05-25-2035", category: "Education" }
+  {
+    id: 1,
+    title: "Save for buying a house",
+    amount: "$100,000",
+    deadline: "05-25-2020",
+    category: "Housing"
+  },
+  {
+    id: 2,
+    title: "John's college fund",
+    amount: "$80,000",
+    deadline: "05-25-2035",
+    category: "Education"
+  }
 ];
 
 export default class Test extends Component {
@@ -85,7 +89,6 @@ export default class Test extends Component {
     this.addExpense = this.addExpense.bind(this);
     this.updateSelected = this.updateSelected.bind(this);
     this.deleteSelectedExpense = this.deleteSelectedExpense.bind(this);
-
   }
 
   deleteSelectedExpense() {
@@ -164,80 +167,109 @@ export default class Test extends Component {
     });
   }
 
-
-
   render() {
     console.log("state info is ", this.state.data);
 
     return (
-      <div class="container-margins">
-        <h3 class="align-center">View Your Current Goals</h3>
-        <DataTable
+      <div className='parentGrid'>
+        <div>
+          <AppBar position='static'>
+            <Toolbar>
+              <Typography variant='h6' className='title'>
+                Financial Goals
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </div>
+        <Grid
+          container
+          direction='row'
+          justify='space-evenly'
+          alignItems='flex-start'
+          spacing={1}
+        >
+          <Grid item xs={12}>
+            <Paper elevation='10' className='paper'>
+              <DataTable
+                className='table'
+                title='Saved Goals'
+                columns={columns}
+                data={this.state.data}
+                selectableRows
+                onRowSelected={this.updateSelected}
+                clearSelectedRows={this.state.toggledClearedRows}
+                // onSelectedRowsChange={this.state.updateRows}
+                customTheme={rowTheme}
+                striped
+                dense
+              />
+            </Paper>
+          </Grid>
+        </Grid>
 
-          className='table'
-          title='Saved Goals'
-          columns={columns}
-          data={this.state.data}
-          selectableRows
-          onRowSelected={this.updateSelected}
-          clearSelectedRows={this.state.toggledClearedRows}
-          // onSelectedRowsChange={this.state.updateRows}
-          customTheme={rowTheme}
-          striped
-          dense
-        />
-        <div class="align-center">
-          <br></br>
-          <br></br>
+        <div class='align-center ' style={{ marginLeft: "600px" }}>
+          <Typography>View Your Current Goals</Typography>
+
           <Fab color='secondary' onClick={this.deleteSelectedExpense}>
             <DeleteRoundedIcon />
           </Fab>
         </div>
-
-        <br />
-        <ColoredLine color='blue' />
-        <br />
-
-        <div class="align-center">
-            <form  noValidate autoComplete='off'>
-              <TextField
-                margin="normal"
-                style={{ margin: 8 }}
-                id='outlined-basic'
-                label='Title'
-                variant='outlined'
-                onChange={this.getExpenseName}
-              />  
-
-              <TextField
-                margin="normal"
-                style={{ margin: 8 }}
-                id='outlined-basic'
-                label='Amount'
-                variant='outlined'
-                onChange={this.getPrice}
-              />
-              <TextField
-                margin="normal"
-                style={{ margin: 8 }}
-                id='outlined-basic'
-                label='Deadline'
-                variant='outlined'
-                onChange={this.getPrice}
-              />
-              <TextField
-                margin="normal"
-                style={{ margin: 8 }}
-                id='outlined-basic'
-                label='Category'
-                variant='outlined'
-                onChange={this.getPrice}
-              />
-            </form>
+        <div class='parentGrid' style={{ marginLeft: "480px" }}>
+          <Grid
+            container
+            direction='column'
+            justify='space-evenly'
+            alignItems='flex-start'
+            spacing={1}
+          >
+            <Paper elevation='10' className='paper'>
+              <Grid item xs={12}>
+                <Paper className='paper'>
+                  <TextField
+                    margin='normal'
+                    style={{ margin: 8 }}
+                    id='outlined-basic'
+                    label='Title'
+                    variant='outlined'
+                    onChange={this.getExpenseName}
+                  />
+                </Paper>
+                <Paper className='paper'>
+                  <TextField
+                    margin='normal'
+                    style={{ margin: 8 }}
+                    id='outlined-basic'
+                    label='Amount'
+                    variant='outlined'
+                    onChange={this.getPrice}
+                  />
+                </Paper>
+                <Paper className='paper'>
+                  <TextField
+                    margin='normal'
+                    style={{ margin: 8 }}
+                    id='outlined-basic'
+                    label='Deadline'
+                    variant='outlined'
+                    onChange={this.getPrice}
+                  />
+                </Paper>
+                <Paper className='paper'>
+                  <TextField
+                    margin='normal'
+                    style={{ margin: 8 }}
+                    id='outlined-basic'
+                    label='Cat'
+                    variant='outlined'
+                    onChange={this.getPrice}
+                  />
+                </Paper>
+              </Grid>
+            </Paper>
+          </Grid>
         </div>
-        <div class="align-center">
-          <br></br>
-          <br></br>
+
+        <div class='align-center' style={{ marginLeft: "600px" }}>
           <Fab color='primary' aria-label='add' onClick={this.addExpense}>
             <AddIcon />
           </Fab>
