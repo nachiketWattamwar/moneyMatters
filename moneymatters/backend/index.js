@@ -1,10 +1,30 @@
+//Nikhil
+
+require('./db/mongoose')
+const bcrypt = require('bcryptjs');
+const auth = require('./middleware/auth')
+
+//models
+const User = require('./models/user')
+const Task = require('./models/task')
+
+//Routers
+const userRouter = require('./routers/userRoutes')
+const taskRouter = require('./routers/taskRoutes')
+
+//Nikhil - end
+
 const express = require("express");
 const bodyParser = require("body-parser");
-const { mongoose } = require("../backend/db/mongoose");
+// const { mongoose } = require("../backend/db/mongoose");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(express.json())
+app.use(userRouter)
+app.use(taskRouter)
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -84,6 +104,23 @@ app.post("/signup", (req, res) => {
   res.send("from sgnup api");
 });
 
-app.listen(3001, () =>
+const port = process.env.PORT || 3001
+app.listen(port, () =>
   console.log("Express server is running on localhost:3001")
 );
+
+
+const jwt = require('jsonwebtoken')
+
+//base64webtoken
+const myFunc = async () => {
+   const token = jwt.sign( {_id : 'abc123'}  , 'signedToken' , { 
+       expiresIn : '7 days'
+   })
+   console.log(token)
+
+   const data = jwt.verify(token , 'signedToken');
+   console.log(token)
+} 
+
+// myFunc()

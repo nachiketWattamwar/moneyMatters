@@ -1,15 +1,21 @@
-var mongoose = require("mongoose");
 
-mongoose.Promise = global.Promise;
 
-mongoose.connect(
-  "mongodb+srv://nachiket:nachiket@cmpe280-emqpv.mongodb.net/test?retryWrites=true&w=majority",{
-    poolSize: 10
-    // other options can go here
-  },
-  () => {
-    console.log("connected to mongoDB");
-  }
-);
+//Connects to database
 
-module.exports = { mongoose };
+const mongoose = require('mongoose')
+
+// mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api' , {
+    mongoose.connect('mongodb+srv://mongouser:mongouser@cmpe295b-h0sia.mongodb.net/maindb?retryWrites=true&w=majority' , {
+    useNewUrlParser : true, 
+    useCreateIndex : true,
+    useUnifiedTopology : true
+})
+
+
+
+
+
+
+
+
+
