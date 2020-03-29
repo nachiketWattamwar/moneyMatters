@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const expenseSchema = new mongoose.Schema({
-
+const incomeSchema = new mongoose.Schema({
     email: {
         type: String,
         unique : true,
@@ -14,19 +13,14 @@ const expenseSchema = new mongoose.Schema({
                 throw new Error('Email is invalid')
             }
         }
-    },
+    }, 
 
-    category : {
+    sourceType : {
         type: String,
         required: true,
         trim: true,
-        required : true,
-        validate(value) {
-            if(!["Food", "Bills", "Rent", "Others"].includes(value)) {
-                throw new Error("Invalid expense category type")
-            }
-        }
-    }, 
+        required : true
+    },
 
     amount : {
         type: Number, 
@@ -38,14 +32,8 @@ const expenseSchema = new mongoose.Schema({
                 throw new Error("Invalid amount value")
             }
         }
-    } , 
-
-    timestamp : {
-        type : Date,
-        required : true
     }
-
 })
 
-const Expense = mongoose.model('Expense' , expenseSchema);
-module.exports = Expense
+const Income = mongoose.model('Income' , incomeSchema);
+module.exports = Income
