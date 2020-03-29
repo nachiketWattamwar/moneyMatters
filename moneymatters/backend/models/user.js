@@ -38,15 +38,38 @@ const userSchema = new mongoose.Schema( {
             }
         }
     },
-    age: {
-        type: Number,
+
+    address : {
+        type : String,
+        trim : true,
+        required : true
+    },
+
+    dob: {
+        type: Date,
         default: 0,
+        required : true,
+    }, 
+
+    gender : {
+        type : String,
+        required : true,
         validate(value) {
-            if (value < 0) {
-                throw new Error('Age must be a postive number')
+            if(!['male' , 'female'].includes(value.toLowerCase())) {
+                throw new Error('Invalid gender value')
             }
         }
-    } , 
+    } ,
+
+    education : {
+        type : String,
+        trim : true
+    },
+
+    designation : {
+        type : String,
+        trim : true
+    },
 
     tokens : [ { 
         token : {

@@ -22,7 +22,7 @@ const expenseSchema = new mongoose.Schema({
         trim: true,
         required : true,
         validate(value) {
-            if(!["Food", "Bills", "Rent", "Others"].includes(value)) {
+            if(!["food", "bills", "rent", "others"].includes(value.toLowerCase())) {
                 throw new Error("Invalid expense category type")
             }
         }

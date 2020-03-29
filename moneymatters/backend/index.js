@@ -6,11 +6,10 @@ const auth = require('./middleware/auth')
 
 //models
 const User = require('./models/user')
-const Task = require('./models/task')
 
 //Routers
 const userRouter = require('./routers/userRoutes')
-const taskRouter = require('./routers/taskRoutes')
+// const taskRouter = require('./routers/taskRoutes')
 
 //Nikhil - end
 
@@ -24,7 +23,7 @@ app.use(bodyParser.json());
 
 app.use(express.json())
 app.use(userRouter)
-app.use(taskRouter)
+// app.use(taskRouter)
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
