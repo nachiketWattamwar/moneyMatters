@@ -1,7 +1,7 @@
 # Backend APIs
-
+Server URL : http://localhost:3001/
 ## Sign Up - <br>
-POST -  http://localhost:3001/users <br>
+POST -  /users <br>
 ```json
 {
 	"name" : "Nitish Joshi" , 
@@ -13,10 +13,35 @@ POST -  http://localhost:3001/users <br>
 ```
 
 ## Login
-POST -  http://localhost:3001/users/login <br>
+POST -  /users/login <br>
 ```json
 {
 	"email" : "nitish@yahoo.co.in",
 	"password" : "12345678"
+}
+```
+
+## Create initial expenses
+POST /expenses/initial <br> 
+```json
+{
+	"email" : "nikhil@yahoo.co.in",
+	"category" : "food",
+	"amount" : 5.89,
+	"timestamp" : "03/30/2020 21:30",
+	"paymentsource" : "Credit card"	
+}
+```
+
+
+## Create new expense
+POST /expenses/ <br> 
+```json
+{
+	"email" : "nikhil@yahoo.co.in",
+	"category" : "food",
+	"amount" : 5.89,
+	"timestamp" : "03/30/2020 21:30",
+	"paymentsource" : "Credit card"	
 }
 ```
