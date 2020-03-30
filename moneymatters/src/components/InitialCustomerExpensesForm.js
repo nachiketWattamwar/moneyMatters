@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../actions/auth";
 
@@ -90,8 +91,10 @@ class InitialCustomerExpensesForm extends Component {
 		} = this.props.props;
 		if (password !== confirmPassword) console.log("passwords do not match");
 		else {
-			signup(firstName, lastName, email, password);
-			//api call to save initial expenses, or you can put that inside auth.js too! (actions)
+			console.log("in initial expenses data");
+			console.log(firstName, lastName, email, password, confirmPassword);
+			//first api call to signup user
+			//after the first one's success, second api call to log initial expenses for the signed up user
 		}
 	};
 

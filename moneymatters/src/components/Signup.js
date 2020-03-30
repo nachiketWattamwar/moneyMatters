@@ -61,11 +61,14 @@ class Signup extends Component {
 
 	saveCustomerDetails = () => {
 		this.setState({ isExpenseForm: true, isCustomerDetailsForm: false }, () => {
+			//could be deleted??
 			const data = this.state;
+			/*
 			axios.post(`http://localhost:3001/signup`, { data }).then(res => {
 				console.log(res);
 				console.log(res.data);
 			});
+			*/
 		});
 	};
 
