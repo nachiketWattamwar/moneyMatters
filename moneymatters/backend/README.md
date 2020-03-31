@@ -28,7 +28,7 @@ POST /expenses/initial <br>
 	"email" : "nikhil@yahoo.co.in",
 	"category" : "food",
 	"amount" : 5.89,
-	"timestamp" : "03/30/2020 21:30",
+	"timestamp" : "12-22-2020",
 	"paymentsource" : "Credit card"	
 }
 ```
@@ -41,7 +41,7 @@ POST /expenses/ <br>
 	"email" : "nikhil@yahoo.co.in",
 	"category" : "food",
 	"amount" : 5.89,
-	"timestamp" : "03/30/2020 21:30",
+	"timestamp" : "03/30/2020",
 	"paymentsource" : "Credit card"	
 }
 ```
