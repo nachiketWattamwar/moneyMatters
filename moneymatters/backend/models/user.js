@@ -10,11 +10,18 @@ Middleware functions. We can create the schema separately and then pass it to mo
 */
 
 const userSchema = new mongoose.Schema( {
-    name: {
+    firstName: {
         type: String,
         required: true,
         trim: true
     },
+
+    lastName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
     email: {
         type: String,
         unique : true,
@@ -27,6 +34,7 @@ const userSchema = new mongoose.Schema( {
             }
         }
     },
+    
     password: {
         type: String,
         required: true,
@@ -41,25 +49,21 @@ const userSchema = new mongoose.Schema( {
 
     address : {
         type : String,
-        trim : true,
-        required : true
+        trim : true
     },
 
     dob: {
-        type: Date,
-        default: 0,
-        required : true,
+        type: Date
     }, 
 
     gender : {
         type : String,
-        required : true,
         validate(value) {
             if(!['male' , 'female'].includes(value.toLowerCase())) {
                 throw new Error('Invalid gender value')
             }
         }
-    } ,
+    },
 
     education : {
         type : String,
@@ -101,7 +105,6 @@ userSchema.methods.generateAuthToken = async function()
     return token
 }
 
- 
 // statics method can be used directly on User method. Used in the userRoutes.js
 userSchema.statics.findByCredentials = async(email , password) => {
     const userFromDatabase = await User.findOne({email})
@@ -113,7 +116,6 @@ userSchema.statics.findByCredentials = async(email , password) => {
     else {
         console.log(userFromDatabase)
     }
-
 
     const isMatch = bcrypt.compareSync(password , userFromDatabase.password) 
     console.log(isMatch)

@@ -3,10 +3,14 @@ const User = require('../models/user')
 
 const auth = async (req , res , next) => {
 
+    if(req.header('Authorization') == null) {
+        console.log("No Auth header found")
+        return res.status(401).send("No Auth header found")
+    }
     const token = req.header('Authorization').replace('Bearer ','');
 
     if(!token) {
-        res.status(401).send("No token")
+        return res.status(401).send("No token")
     }
     else {
         console.log("Token Found")
@@ -27,7 +31,7 @@ const auth = async (req , res , next) => {
     }
     catch(e) {
         console.log(e)
-        res.status(401).send("Error in authentication")
+        return res.status(401).send("Error in authentication")
     }
 
     

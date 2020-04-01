@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
+const User = require('../models/user');
 const expenseSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        unique : true,
         required: true,
         trim: true,
         lowercase: true,
@@ -16,13 +16,17 @@ const expenseSchema = new mongoose.Schema({
         }
     },
 
+    description : {
+        type: String,
+        trim: true
+    },
+
     category : {
         type: String,
         required: true,
         trim: true,
-        required : true,
         validate(value) {
-            if(!["food", "bills", "rent", "others"].includes(value.toLowerCase())) {
+            if(!["food", "bills", "rent","travel"].includes(value.toLowerCase())) {
                 throw new Error("Invalid expense category type")
             }
         }
@@ -32,16 +36,19 @@ const expenseSchema = new mongoose.Schema({
         type: Number, 
         required : true, 
         trim : true,
-        required : true,
         validate(value) {
             if(value <= 0) {
                 throw new Error("Invalid amount value")
             }
         }
-    } , 
+    }, 
 
     timestamp : {
         type : Date,
+    } , 
+
+    expenseType : {
+        type : String,
         required : true
     }
 
