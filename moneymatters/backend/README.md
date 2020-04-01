@@ -27,9 +27,10 @@ POST /expenses/initial <br>
 {
 	"email" : "nikhil@yahoo.co.in",
 	"category" : "food",
-	"amount" : 5.89,
-	"timestamp" : "12-22-2020",
-	"paymentsource" : "Credit card"	
+	"amount" : 90,
+	"timestamp" : "04-12-2018",
+	"expenseType" : "Cash",
+	"description" : "groceries"
 }
 ```
 
