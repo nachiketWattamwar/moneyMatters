@@ -34,6 +34,14 @@ app.use(function(req, res, next) {
 	);
 	next();
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(express.json());
+app.use(userRouter);
+// app.use(taskRouter)
+
 app.use("/recentFiveExpenses", (req, res) => {
 	const recentData = [
 		{

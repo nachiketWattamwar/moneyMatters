@@ -75,8 +75,9 @@ class Login extends Component {
 
 	onLogin = () => {
 		const data = this.state;
-		axios.post(`http://localhost:3001/users/login`, { data }).then(res => {
-			console.log(res.data);
+		console.log("in onLogin method: ", data);
+		axios.post(`http://localhost:3001/users/login`, data).then(res => {
+			console.log("in login.js: " + res.data);
 
 			if (res.data) {
 				this.setState({
