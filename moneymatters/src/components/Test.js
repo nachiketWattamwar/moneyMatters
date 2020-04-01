@@ -12,7 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import "../scss/_mystyles.scss";
 
 //const data = [{ expense: "bargain", price: "12", date: "12/12/12" }];
@@ -62,8 +63,10 @@ export default class Test extends Component {
     super(props);
     this.state = {
       totalExpense: 1212,
-      initialDate: "Fri Dec 06 2019 17:17:00 GMT-0800",
-      expenseName: "Default",
+      date: "Fri Dec 06 2019 17:17:00 GMT-0800",
+      expenseType: "Default",
+      categoryType: "",
+      description: "",
       price: 0,
       data: data,
       selectedRows: null,
@@ -72,12 +75,24 @@ export default class Test extends Component {
     };
 
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.getExpenseName = this.getExpenseName.bind(this);
+    this.getExpenseType = this.getExpenseType.bind(this);
     this.getPaymentType = this.getPaymentType.bind(this);
     this.getPrice = this.getPrice.bind(this);
+    this.getDescription = this.getDescription.bind(this);
+    this.getCategoryType = this.getCategoryType.bind(this);
     this.addExpense = this.addExpense.bind(this);
     this.updateSelected = this.updateSelected.bind(this);
     this.deleteSelectedExpense = this.deleteSelectedExpense.bind(this);
+  }
+  getDescription(e) {
+    this.setState({
+      description: e.target.value
+    });
+  }
+  getCategoryType(e) {
+    this.setState({
+      categoryType: e.target.value
+    });
   }
 
   deleteSelectedExpense() {
@@ -116,15 +131,18 @@ export default class Test extends Component {
 
     const newExpense = {
       id: id,
-      title: this.state.expenseName,
+      expenseType: this.state.expenseType,
       price: this.state.price,
-      date: "12-11-11"
+      description: this.state.description,
+      categoryType: this.state.categoryType,
+      date: this.state.date
     };
 
     data.push(newExpense);
+    console.log("datapush ", newExpense);
     axios.post(`http://localhost:3001/newExpense`, { newExpense }).then(res => {
       console.log(res);
-      console.log(res.data);
+      console.log("===================", res.data);
     });
   }
 
@@ -135,7 +153,7 @@ export default class Test extends Component {
   }
   handleDateChange(date) {
     this.setState(state => ({
-      initialDate: date
+      date: date
     }));
   }
 
@@ -145,15 +163,15 @@ export default class Test extends Component {
     });
   }
 
-  getExpenseName(e) {
+  getExpenseType(e) {
     this.setState({
-      expenseName: e.target.value
+      expenseType: e.target.value
     });
   }
 
   render() {
     return (
-      <div class='container-margins'>
+      <div>
         <div>
           <AppBar position='static'>
             <Toolbar>
@@ -166,7 +184,7 @@ export default class Test extends Component {
         </div>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper elevation='10' className='paper'>
+            <Paper elevation={10} className='paper'>
               <div className='totalExpensesTable'>
                 <DataTable
                   className='table'
@@ -181,7 +199,7 @@ export default class Test extends Component {
                   dense
                 />
               </div>
-              <div class='align-center'>
+              <div>
                 <br></br>
                 <br></br>
                 <Fab color='secondary' onClick={this.deleteSelectedExpense}>
@@ -199,16 +217,30 @@ export default class Test extends Component {
               alignItems='flex-start'
               spacing={1}
             >
-              <Paper elevation='10' className='paper'>
+              <Paper elevation={10} className='paper'>
+                <Grid item xs>
+                  <Paper className='paper'>
+                    <Select
+                      fullWidth={true}
+                      labelId='demo-simple-select-label'
+                      id='demo-simple-select'
+                      onChange={this.getCategoryType}
+                    >
+                      <MenuItem value={"bills"}>Bills</MenuItem>
+                      <MenuItem value={"food"}>Food</MenuItem>
+                      <MenuItem value={"rent"}>Rent</MenuItem>
+                    </Select>
+                  </Paper>
+                </Grid>
                 <Grid item xs>
                   <Paper className='paper'>
                     <TextField
                       margin='normal'
                       style={{ margin: 8 }}
                       id='outlined-basic'
-                      label='Expense Name'
+                      label='Description'
                       variant='outlined'
-                      onChange={this.getExpenseName}
+                      onChange={this.getDescription}
                     />
                   </Paper>
                 </Grid>
@@ -232,9 +264,9 @@ export default class Test extends Component {
                       margin='normal'
                       style={{ margin: 8 }}
                       id='outlined-basic'
-                      label='Payment Type'
+                      label='Expense Type'
                       variant='outlined'
-                      onChange={this.getPaymentType}
+                      onChange={this.getExpenseType}
                     />
                   </Paper>
                 </Grid>
