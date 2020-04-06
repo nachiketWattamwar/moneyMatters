@@ -118,4 +118,21 @@ router.patch("/expenses/:id"  , async (req,res) => {
 
 })
 
+
+router.delete("/expenses/:id", async (req, res) => {
+	try {
+		const exp = await Expense.findByIdAndDelete(req.params.id);
+
+		if (!exp) {
+			return res.status(404).send("Invalid deletion request");
+		}
+
+        res.send(exp);
+        
+	} catch (e) {
+		res.status(500).send();
+	}
+});
+
+
 module.exports = router
