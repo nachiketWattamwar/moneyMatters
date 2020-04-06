@@ -88,8 +88,10 @@ router.get("/expenses" , uservalidity , async (req , res) => {
 
 })
 
-
-router.patch("/expenses/:id" , uservalidity , async (req,res) => {
+/*
+* Update 
+*/
+router.patch("/expenses/:id"  , async (req,res) => {
 
     const updates = Object.keys(req.body)
     const allowedUpdates = ['description', 'amount', 'expenseType' , 'category']
@@ -108,6 +110,7 @@ router.patch("/expenses/:id" , uservalidity , async (req,res) => {
         })
 
         await exp.save()
+        res.status(200).send(exp)
     }
     catch (e) {
         res.status(400).send(e)
