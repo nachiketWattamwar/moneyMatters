@@ -57,7 +57,7 @@ const tableIcons = {
 	ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
-
+/*
 const columns = [
 	//{ title: "id", field: "id" },
 	{ title: "Name", field: "Name" },
@@ -71,6 +71,39 @@ let data = [
 	{ id: "3", Name: "Gas", Amount: "$22", Date: "16 Mar, 2019" },
 	{ id: "4", Name: "Medical Bills", Amount: "$220", Date: "16 Mar, 2019" },
 	{ id: "5", Name: "Pet", Amount: "$220", Date: "15 Mar, 2019" }
+];
+*/
+
+const columns = [
+	//{ title: "id", field: "id" },
+	{ title: "Name", field: "Name" },
+	{ title: "Amount", field: "Amount" },
+	{ title: "Start Date", field: "StartDate" },
+	{ title: "End Date", field: "EndDate" }
+];
+
+let data = [
+	{
+		id: "1",
+		Name: "Retirement Fund",
+		Amount: "$100,000",
+		StartDate: "16 Mar, 2019",
+		EndDate: "16 Mar, 2055"
+	},
+	{
+		id: "2",
+		Name: "John's College Fund",
+		Amount: "50,000",
+		StartDate: "16 Aug, 2015",
+		EndDate: "16 May, 2030"
+	},
+	{
+		id: "3",
+		Name: "Savings for house",
+		Amount: "200,000",
+		StartDate: "10 Feb, 2019",
+		EndDate: "10 Mar, 2021"
+	}
 ];
 
 export default class Goals extends Component {
@@ -106,7 +139,7 @@ export default class Goals extends Component {
 							<div className='totalExpensesTable'>
 								<MaterialTable
 									icons={tableIcons}
-									title='Recent Expenses'
+									title='Goals set by you'
 									columns={this.state.columns}
 									data={this.state.data}
 									editable={{
