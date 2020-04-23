@@ -17,7 +17,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
+import axios from "axios";
 const useStyles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -47,9 +47,17 @@ class InitialCustomerExpensesForm extends Component {
       wifi: null,
       travel: null,
       mobile: null,
-      popup: true
+      popup: true,
+      data:null,
     };
     this.handleClose = this.handleClose.bind(this);
+  }
+
+  componentDidMount(){
+     const { data } = this.props.data;
+     console.log("inside component will mount ",data)
+    // this.setState({data:data});
+
   }
   handleClose = () => {
     this.setState({
@@ -90,21 +98,18 @@ class InitialCustomerExpensesForm extends Component {
         });
 	}; */
 
-  onSignup = async e => {
+  onSignup = async (e) => {
     e.preventDefault();
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword
-    } = this.props.props;
-    if (password !== confirmPassword) console.log("passwords do not match");
+    const data = this.props.data;
+    if (data.password !== data.confirmPassword) console.log("passwords do not match");
     else {
       console.log("in initial expenses data");
-      console.log(firstName, lastName, email, password, confirmPassword);
       //first api call to signup user
       //after the first one's success, second api call to log initial expenses for the signed up user
+      axios.post(`http://localhost:3001/users`,data).then(res => {
+				//console.log(res);
+				console.log(res.data);
+			});
     }
   };
 
@@ -113,8 +118,7 @@ class InitialCustomerExpensesForm extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-
+    const { classes,data } = this.props;
     return (
       <div>
         <Dialog

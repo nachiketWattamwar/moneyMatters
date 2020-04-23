@@ -52,9 +52,9 @@ router.post("/expenses", uservalidity, async (req, res) => {
 });
 
 /*
- * All expenses of a particular user.
+ * All expenses of a particular user.uservalidity
  */
-router.get("/expenses", uservalidity, async (req, res) => {
+router.get("/expenses", async (req, res) => {
   const userEmail = req.body.email;
   console.log("Getting expenses for user - " + userEmail);
   try {

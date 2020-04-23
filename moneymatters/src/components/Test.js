@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -110,6 +109,20 @@ class Test extends Component {
     };
   }
 
+  componentWillMount() {
+    const expenseData = {
+      email: this.props.email.email, //done
+    };
+    axios.get(`http://localhost:3001/expenses`, expenseData).then((res) => {
+      console.log("after axios call ", res.data);
+      //newData.id = res.data._id;
+      //let temp = this.state.data.concat(newData);
+      this.setState({
+        data: res.data,
+      });
+    });
+  }
+
   render() {
     console.log("redux info ", this.props.email.email);
 
@@ -138,13 +151,7 @@ class Test extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-                          //newData.id = this.state.data.length + 1;
-                          // let temp = this.state.data.concat(newData);
-                          // this.setState({
-                          //   data: temp,
-                          // });
                           //call to the backend
-
                           const expenseData = {
                             email: this.props.email.email, //done
                             description: newData.Description, // done

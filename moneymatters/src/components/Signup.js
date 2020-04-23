@@ -12,339 +12,293 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import axios from "axios";
 import InitialCustomerExpensesForm from "./InitialCustomerExpensesForm";
 
 function Copyright() {
-	return (
-		<Typography variant='body2' color='textSecondary' align='center'>
-			{"Copyright © "}
-			<Link color='inherit'>Money Matters</Link> {new Date().getFullYear()}
-			{"."}
-		</Typography>
-	);
+  return (
+    <Typography variant='body2' color='textSecondary' align='center'>
+      {"Copyright © "}
+      <Link color='inherit'>Money Matters</Link> {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
 }
 // Higher order component is withStyles
-const useStyles = theme => ({
-	paper: {
-		marginTop: theme.spacing(8),
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center"
-	},
-	avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main
-	},
-	form: {
-		width: "100%", // Fix IE 11 issue.
-		marginTop: theme.spacing(3)
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2)
-	}
+const useStyles = (theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 });
 
 class Signup extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			firstName: null,
-			lastName: null,
-			email: null,
-			password: null,
-			confirmPassword: null,
-			isCustomerDetailsForm: true,
-			isExpenseForm: false
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: null,
+      lastName: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+      age:0,
+      primaryincome:null,
+      country:null,
+      gender:null,
+      profession:null,
+      isCustomerDetailsForm: true,
+      isExpenseForm: false,
+    };
+  }
 
-	saveCustomerDetails = () => {
-		this.setState({ isExpenseForm: true, isCustomerDetailsForm: false }, () => {
-			//could be deleted??
-			const data = this.state;
-			/*
-			axios.post(`http://localhost:3001/signup`, { data }).then(res => {
-				console.log(res);
-				console.log(res.data);
-			});
-			*/
-		});
-	};
+  saveCustomerDetails = () => {
+    console.log("=========state information",this.state)
+    this.setState({ isExpenseForm: true, isCustomerDetailsForm: false }, () => {
+      //could be deleted??
+      const data = this.state;
+      
 
-	updateState = e => {
-		switch (e.target.name) {
-			case "firstName":
-				this.setState({
-					firstName: e.target.value
-				});
-				break;
-			case "lastName":
-				this.setState({ lastName: e.target.value });
-				break;
-			case "email":
-				this.setState({ email: e.target.value });
-				break;
-			case "password":
-				this.setState({ password: e.target.value });
-				break;
-			case "confirmPassword":
-				this.setState({ confirmPassword: e.target.value });
-				break;
-			default:
-			// console.log("inside default");
-		}
-	};
+			
+    });
+  };
 
-	render() {
-		const { classes } = this.props;
+  updateState = (e) => {
+    //console.log("E is ",e.target.value)
+    switch (e.target.name) {
+      case "firstName":
+        this.setState({
+          firstName: e.target.value,
+        });
+        break;
+      case "lastName":
+        this.setState({ lastName: e.target.value });
+        break;
+      case "email":
+        this.setState({ email: e.target.value });
+        break;
+      case "password":
+        this.setState({ password: e.target.value });
+        break;
+      case "confirmPassword":
+        this.setState({ confirmPassword: e.target.value });
+        break;
+      case "age":
+        const ageEntered = parseInt(e.target.value,10);
+        this.setState({age:ageEntered});
+      case "primaryincome":
+        this.setState({primaryincome:e.target.value});
+      case 'country':
+        this.setState({country:e.target.value});
+      case 'gender':
+        this.setState({gender:e.target.value});
+      case 'profession':
+        this.setState({profession:e.target.value});
 
-		//console.log("=============", this.props);
-		return (
-			<div>
-				{this.state.isCustomerDetailsForm && (
-					<Container component='main' maxWidth='xs'>
-						<CssBaseline />
-						<div className={classes.paper}>
-							<Avatar variant='rounded' className={classes.avatar}>
-								<LockOutlinedIcon />
-							</Avatar>
-							<Typography component='h1' variant='h5'>
-								Sign up
-							</Typography>
-							<form className={classes.form} noValidate>
-								<Grid container spacing={2}>
-									<Grid item xs={12} sm={6}>
-										<TextField
-											autoComplete='fname'
-											name='firstName'
-											variant='outlined'
-											required
-											fullWidth
-											id='firstName'
-											label='First Name'
-											autoFocus
-											onChange={this.updateState}
-										/>
-									</Grid>
-									<Grid item xs={12} sm={6}>
-										<TextField
-											variant='outlined'
-											required
-											fullWidth
-											id='lastName'
-											label='Last Name'
-											name='lastName'
-											autoComplete='lname'
-											onChange={this.updateState}
-										/>
-									</Grid>
-									<Grid item xs={12}>
-										<TextField
-											variant='outlined'
-											required
-											fullWidth
-											id='email'
-											label='Email Address'
-											name='email'
-											autoComplete='email'
-											onChange={this.updateState}
-										/>
-									</Grid>
-									<Grid item xs={12}>
-										<TextField
-											variant='outlined'
-											required
-											fullWidth
-											name='password'
-											label='Password'
-											type='password'
-											id='password'
-											autoComplete='current-password'
-											onChange={this.updateState}
-										/>
-									</Grid>
+      default:
+      // console.log("inside default");
+    }
+  
+  };
 
-									<Grid item xs={12}>
-										<TextField
-											variant='outlined'
-											required
-											fullWidth
-											name='confirmPassword'
-											label='Confirm Password'
-											type='password'
-											id='confirmPassword'
-											onChange={this.updateState}
-										/>
-									</Grid>
+  render() {
+    const { classes } = this.props;
+    //console.log("============state in render========",this.state)
+    //console.log("=============", this.props);
+    return (
+      <div>
+        {this.state.isCustomerDetailsForm && (
+          <Container component='main' maxWidth='xs'>
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar variant='rounded' className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component='h1' variant='h5'>
+                Sign up
+              </Typography>
+              <form className={classes.form} noValidate>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete='fname'
+                      name='firstName'
+                      variant='outlined'
+                      required
+                      fullWidth
+                      id='firstName'
+                      label='First Name'
+                      autoFocus
+                      onChange={this.updateState}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant='outlined'
+                      required
+                      fullWidth
+                      id='lastName'
+                      label='Last Name'
+                      name='lastName'
+                      autoComplete='lname'
+                      onChange={this.updateState}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant='outlined'
+                      required
+                      fullWidth
+                      id='email'
+                      label='Email Address'
+                      name='email'
+                      autoComplete='email'
+                      onChange={this.updateState}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant='outlined'
+                      required
+                      fullWidth
+                      name='password'
+                      label='Password'
+                      type='password'
+                      id='password'
+                      autoComplete='current-password'
+                      onChange={this.updateState}
+                    />
+                  </Grid>
 
-									<Grid item xs={12}>
-										<FormControlLabel
-											control={
-												<Checkbox value='allowExtraEmails' color='primary' />
-											}
-											label='I want to receive inspiration, marketing promotions and updates via email.'
-										/>
-									</Grid>
-								</Grid>
-								<Button
-									// type='submit'
-									fullWidth
-									variant='contained'
-									color='primary'
-									className={classes.submit}
-									onClick={this.saveCustomerDetails}
-								>
-									Next
-								</Button>
-								<Grid container justify='flex-end'>
-									<Grid item>
-										<Link to='/Login' variant='body2'>
-											Already have an account? Sign in
-										</Link>
-									</Grid>
-								</Grid>
-							</form>
-						</div>
-					</Container>
-				)}
+                  <Grid item xs={12}>
+                    <TextField
+                      variant='outlined'
+                      required
+                      fullWidth
+                      name='confirmPassword'
+                      label='Confirm Password'
+                      type='password'
+                      min="7"
+                      id='confirmPassword'
+                      onChange={this.updateState}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                  <TextField
+                      //autoComplete='fname'
+                      name='age'
+                      variant='outlined'
+                      required
+                      fullWidth
+                      id='age'
+                      label='Age'
+                      type='number'
+                      inputProps={{ min: "0", max: "100", step: "1" }}
+                      onChange={this.updateState}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant='outlined'
+                      required
+                      fullWidth
+                      id='PrimaryIncome'
+                      label='Primary Income'
+                      name='primaryincome'
+                      type='number'
+                      inputProps={{ min: "0" }}
+                      onChange={this.updateState}
+                    />
+                  </Grid>
 
-				{this.state.isExpenseForm && (
-					<InitialCustomerExpensesForm props={this.state} />
-				)}
-			</div>
-		);
-	}
+                  <Grid item xs={12} sm={6}>
+                  <InputLabel id="demo-simple-select-label">Country</InputLabel>
+                  <Select
+                    //labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    //value={age}
+                    fullWidth
+                    name="country"
+                    onChange={this.updateState}
+                  >
+                    <MenuItem value={'USA'}>USA</MenuItem>
+                    <MenuItem value={'India'}>India</MenuItem>
+                    <MenuItem value={'Other'}>Other</MenuItem>
+                  </Select>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                  <Select
+                    //labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="gender"
+                    fullWidth
+                    onChange={this.updateState}
+                  >
+                    <MenuItem value={'male'}>Male</MenuItem>
+                    <MenuItem value={'female'}>Female</MenuItem>
+                    
+                  </Select>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InputLabel id="demo-simple-select-label">Profession</InputLabel>
+                        <Select
+                          //labelId="demo-simple-select-label"
+                          name="profession"
+                          id="demo-simple-select"
+                          fullWidth
+                          onChange={this.updateState}
+                        >
+                          <MenuItem value={'Student'}>Student</MenuItem>
+                          <MenuItem value={'Working'}>Working</MenuItem>
+                          <MenuItem value={'Other'}>Other</MenuItem>
+                        </Select>
+                    </Grid>
+                  </Grid>
+                <Button
+                  // type='submit'
+                  fullWidth
+                  variant='contained'
+                  color='primary'
+                  className={classes.submit}
+                  onClick={this.saveCustomerDetails}
+                >
+                  Next
+                </Button>
+                <Grid container justify='flex-end'>
+                  <Grid item>
+                    <Link to='/Login' variant='body2'>
+                      Already have an account? Sign in
+                    </Link>
+                  </Grid>
+                </Grid>
+              </form>
+            </div>
+          </Container>
+        )}
+
+        {this.state.isExpenseForm && (
+          <InitialCustomerExpensesForm data={this.state} />
+        )}
+      </div>
+    );
+  }
 }
 
 export default withStyles(useStyles)(Signup);
-/* <Grid item xs={12} sm={6}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										id='lastName'
-										label='Last Name'
-										name='lastName'
-										autoComplete='lname'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										id='email'
-										label='Email Address'
-										name='email'
-										autoComplete='email'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										name='password'
-										label='Password'
-										type='password'
-										id='password'
-										autoComplete='current-password'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										name='rent'
-										label='Rent'
-										id='rent'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										name='grocery'
-										label='Grocery'
-										id='grocery'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										name='travel'
-										label='Travel'
-										id='travel'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										name='mobile'
-										label='Mobile'
-										id='mobile'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<TextField
-										variant='outlined'
-										required
-										fullWidth
-										name='wifi'
-										label='WiFi'
-										id='wifi'
-										onChange={this.getFirstName}
-									/>
-								</Grid>
-								<Grid item xs={12}>
-									<FormControlLabel
-										control={
-											<Checkbox value='allowExtraEmails' color='primary' />
-										}
-										label='I want to receive inspiration, marketing promotions and updates via email.'
-									/>
-								</Grid>
-							</Grid>
-							<Button
-								// type='submit'
-								fullWidth
-								variant='contained'
-								color='primary'
-								className={classes.submit}
-								onClick={this.SignupData}
-							>
-								Sign Up
-							</Button>
-							<Grid container justify='flex-end'>
-								<Grid item>
-									<Link to='/Login' variant='body2'>
-										Already have an account? Sign in
-									</Link>
-								</Grid>
-							</Grid>
-						</form>
-					</div>
-					<Box mt={5}>
-						<Copyright />
-					</Box>
-				</Container>
-			</div>
-		);
-	}
-}
 
-export default withStyles(useStyles)(Signup); */
