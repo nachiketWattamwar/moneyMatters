@@ -10,7 +10,7 @@ import ReportsHorizontalBar from "../charts/ReportsHorizontalBar";
 import "../scss/_mystyles.scss";
 
 const spanStyle = {
-  display: "inline"
+  display: "inline",
 };
 
 const dataExpense = {
@@ -19,9 +19,9 @@ const dataExpense = {
     {
       data: [30, 500, 100],
       backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
-    }
-  ]
+      hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+    },
+  ],
 };
 
 const dataIncome = {
@@ -30,9 +30,9 @@ const dataIncome = {
     {
       data: [1000, 500, 100],
       backgroundColor: ["#23A21B", "	#0000ff", "#FFCE56"],
-      hoverBackgroundColor: ["#c1f4be", "#e6e6ff", "#ffe299"]
-    }
-  ]
+      hoverBackgroundColor: ["#c1f4be", "#e6e6ff", "#ffe299"],
+    },
+  ],
 };
 
 export default class DetailFinances extends Component {
@@ -64,9 +64,22 @@ export default class DetailFinances extends Component {
                   <ReportsHorizontalBar />
                 </Paper>
               </Grid>
-              <Grid item height='300px' xs={6}>
+            </Grid>
+          </div>
+          <div>
+            <Grid
+              container
+              direction='row'
+              justify='space-evenly'
+              alignItems='flex-start'
+              spacing={2}
+            >
+              <Grid item xs={6}>
                 <Paper className='reports' elevation='10'>
-                  other infor asdfsf asdfsf asdfsfs
+                  <Typography align='center'>
+                    Expenses (All figures in $)
+                  </Typography>
+                  <ReportsPie data={dataExpense} legend={"asfd"} />
                 </Paper>
               </Grid>
             </Grid>
@@ -81,34 +94,10 @@ export default class DetailFinances extends Component {
             >
               <Grid item xs={6}>
                 <Paper className='reports' elevation='10'>
-                  <Typography align='center'>Expenses</Typography>
-                  <ReportsPie data={dataExpense} />
-                </Paper>
-              </Grid>
-              <Grid item height='300px' xs={6}>
-                <Paper className='reports' elevation='10'>
-                  other infor
-                </Paper>
-              </Grid>
-            </Grid>
-          </div>
-          <div>
-            <Grid
-              container
-              direction='row'
-              justify='space-evenly'
-              alignItems='flex-start'
-              spacing={2}
-            >
-              <Grid item xs={6}>
-                <Paper className='reports' elevation='10'>
-                  <Typography align='center'>Income</Typography>
+                  <Typography align='center'>
+                    Income (All figures in $)
+                  </Typography>
                   <ReportsPie data={dataIncome} />
-                </Paper>
-              </Grid>
-              <Grid item height='300px' xs={6}>
-                <Paper className='reports' elevation='10'>
-                  other infor
                 </Paper>
               </Grid>
             </Grid>
