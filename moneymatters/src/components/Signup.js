@@ -12,9 +12,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import axios from "axios";
 import InitialCustomerExpensesForm from "./InitialCustomerExpensesForm";
 
@@ -57,25 +57,19 @@ class Signup extends Component {
       email: null,
       password: null,
       confirmPassword: null,
-      age:0,
-      primaryincome:null,
-      country:null,
-      gender:null,
-      profession:null,
+      age: 0,
+      primaryincome: null,
+      country: null,
+      gender: null,
+      profession: null,
       isCustomerDetailsForm: true,
       isExpenseForm: false,
     };
   }
 
-  saveCustomerDetails = () => {
-    console.log("=========state information",this.state)
-    this.setState({ isExpenseForm: true, isCustomerDetailsForm: false }, () => {
-      //could be deleted??
-      const data = this.state;
-      
-
-			
-    });
+  saveCustomerDetails = async () => {
+    await axios.post(`http://localhost:3001/users`, this.state);
+    this.setState({ isExpenseForm: true, isCustomerDetailsForm: false });
   };
 
   updateState = (e) => {
@@ -99,21 +93,20 @@ class Signup extends Component {
         this.setState({ confirmPassword: e.target.value });
         break;
       case "age":
-        const ageEntered = parseInt(e.target.value,10);
-        this.setState({age:ageEntered});
+        const ageEntered = parseInt(e.target.value, 10);
+        this.setState({ age: ageEntered });
       case "primaryincome":
-        this.setState({primaryincome:e.target.value});
-      case 'country':
-        this.setState({country:e.target.value});
-      case 'gender':
-        this.setState({gender:e.target.value});
-      case 'profession':
-        this.setState({profession:e.target.value});
+        this.setState({ primaryincome: e.target.value });
+      case "country":
+        this.setState({ country: e.target.value });
+      case "gender":
+        this.setState({ gender: e.target.value });
+      case "profession":
+        this.setState({ profession: e.target.value });
 
       default:
       // console.log("inside default");
     }
-  
   };
 
   render() {
@@ -193,13 +186,13 @@ class Signup extends Component {
                       name='confirmPassword'
                       label='Confirm Password'
                       type='password'
-                      min="7"
+                      min='7'
                       id='confirmPassword'
                       onChange={this.updateState}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                  <TextField
+                    <TextField
                       //autoComplete='fname'
                       name='age'
                       variant='outlined'
@@ -227,51 +220,57 @@ class Signup extends Component {
                   </Grid>
 
                   <Grid item xs={12} sm={6}>
-                  <InputLabel id="demo-simple-select-label">Country</InputLabel>
-                  <Select
-                    //labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    //value={age}
-                    fullWidth
-                    name="country"
-                    onChange={this.updateState}
-                  >
-                    <MenuItem value={'USA'}>USA</MenuItem>
-                    <MenuItem value={'India'}>India</MenuItem>
-                    <MenuItem value={'Other'}>Other</MenuItem>
-                  </Select>
+                    <InputLabel id='demo-simple-select-label'>
+                      Country
+                    </InputLabel>
+                    <Select
+                      //labelId="demo-simple-select-label"
+                      id='demo-simple-select'
+                      //value={age}
+                      fullWidth
+                      name='country'
+                      onChange={this.updateState}
+                    >
+                      <MenuItem value={"USA"}>USA</MenuItem>
+                      <MenuItem value={"India"}>India</MenuItem>
+                      <MenuItem value={"Canada"}>Canada</MenuItem>
+                      <MenuItem value={"England"}>England</MenuItem>
+                    </Select>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                  <Select
-                    //labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    name="gender"
-                    fullWidth
-                    onChange={this.updateState}
-                  >
-                    <MenuItem value={'male'}>Male</MenuItem>
-                    <MenuItem value={'female'}>Female</MenuItem>
-                    
-                  </Select>
+                    <InputLabel id='demo-simple-select-label'>
+                      Gender
+                    </InputLabel>
+                    <Select
+                      //labelId="demo-simple-select-label"
+                      id='demo-simple-select'
+                      name='gender'
+                      fullWidth
+                      onChange={this.updateState}
+                    >
+                      <MenuItem value={"male"}>Male</MenuItem>
+                      <MenuItem value={"female"}>Female</MenuItem>
+                      <MenuItem value={"other"}>other</MenuItem>
+                    </Select>
                   </Grid>
                   <Grid item xs={12}>
-                    <InputLabel id="demo-simple-select-label">Profession</InputLabel>
-                        <Select
-                          //labelId="demo-simple-select-label"
-                          name="profession"
-                          id="demo-simple-select"
-                          fullWidth
-                          onChange={this.updateState}
-                        >
-                          <MenuItem value={'Student'}>Student</MenuItem>
-                          <MenuItem value={'Working'}>Working</MenuItem>
-                          <MenuItem value={'Other'}>Other</MenuItem>
-                        </Select>
-                    </Grid>
+                    <InputLabel id='demo-simple-select-label'>
+                      Profession
+                    </InputLabel>
+                    <Select
+                      //labelId="demo-simple-select-label"
+                      name='profession'
+                      id='demo-simple-select'
+                      fullWidth
+                      onChange={this.updateState}
+                    >
+                      <MenuItem value={"Student"}>Student</MenuItem>
+                      <MenuItem value={"Working"}>Working</MenuItem>
+                      <MenuItem value={"Other"}>Other</MenuItem>
+                    </Select>
                   </Grid>
+                </Grid>
                 <Button
-                  // type='submit'
                   fullWidth
                   variant='contained'
                   color='primary'
@@ -301,4 +300,3 @@ class Signup extends Component {
 }
 
 export default withStyles(useStyles)(Signup);
-

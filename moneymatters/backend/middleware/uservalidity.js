@@ -2,7 +2,6 @@ const User = require("../models/user");
 
 const uservalidity = async (req, res, next) => {
   try {
-    //console.log("inside validation=========", req);
     const userObj = await User.findOne({ email: req.body.email });
 
     if (userObj == null) {
