@@ -37,8 +37,9 @@ const dataIncome = {
 
 export default class DetailFinances extends Component {
   render() {
+    const imagePath = `url(images/pencilpen.jpg)`;
     return (
-      <div>
+      <div style={{ backgroundColor: "darkgrey" }}>
         <AppBar position='static'>
           <Toolbar>
             <Typography variant='h6' className='title'>

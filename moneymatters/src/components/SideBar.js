@@ -39,7 +39,6 @@ class SideBar extends React.Component {
           </ListItemIcon>
           <ListItemText primary='Reports' />
         </ListItem>
-        <ListItem button></ListItem>
         <ListItem button component={Link} to='/goals'>
           <ListItemIcon>
             <EmojiEventsIcon />

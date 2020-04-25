@@ -175,5 +175,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   storeemail: (email) => dispatch(storeemail(email)),
 });
-const L = withStyles(useStyles)(Login);
-export default connect(mapStateToProps, mapDispatchToProps)(L);
+const LoginComponent = withStyles(useStyles)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

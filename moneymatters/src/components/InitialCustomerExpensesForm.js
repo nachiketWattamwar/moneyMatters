@@ -18,24 +18,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
-const useStyles = theme => ({
+const useStyles = (theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 });
 
 class InitialCustomerExpensesForm extends Component {
@@ -48,23 +48,22 @@ class InitialCustomerExpensesForm extends Component {
       travel: null,
       mobile: null,
       popup: true,
-      data:null,
+      //data:null,
     };
     this.handleClose = this.handleClose.bind(this);
   }
 
-  componentDidMount(){
-     const { data } = this.props.data;
-     console.log("inside component will mount ",data)
+  componentDidMount() {
+    const { data } = this.props.data;
+    console.log("inside component will mount ", data);
     // this.setState({data:data});
-
   }
   handleClose = () => {
     this.setState({
-      popup: false
+      popup: false,
     });
   };
-  updateState = e => {
+  updateState = (e) => {
     switch (e.target.name) {
       case "rent":
         this.setState({ rent: e.target.value });
@@ -101,15 +100,29 @@ class InitialCustomerExpensesForm extends Component {
   onSignup = async (e) => {
     e.preventDefault();
     const data = this.props.data;
-    if (data.password !== data.confirmPassword) console.log("passwords do not match");
+
+    const { rent, grocery, wifi, travel, mobile } = this.state;
+    const initialExpenses = {
+      rent: rent,
+      grocery: grocery,
+      wifi: wifi,
+      mobile: mobile,
+      travel: travel,
+      email: data.email,
+      timestamp: new Date(),
+    };
+
+    //console.log("inside intial expenses data==========", initialExpenses);
+
+    if (data.password !== data.confirmPassword)
+      console.log("passwords do not match");
     else {
-      console.log("in initial expenses data");
-      //first api call to signup user
-      //after the first one's success, second api call to log initial expenses for the signed up user
-      axios.post(`http://localhost:3001/users`,data).then(res => {
-				//console.log(res);
-				console.log(res.data);
-			});
+      const firstResponse = await axios.post(
+        "http://localhost:3001/expenses/initial",
+        initialExpenses
+      );
+
+      //console.log("inside 2nd api call========",firstResponse);
     }
   };
 
@@ -118,7 +131,7 @@ class InitialCustomerExpensesForm extends Component {
   }
 
   render() {
-    const { classes,data } = this.props;
+    const { classes, data } = this.props;
     return (
       <div>
         <Dialog
@@ -160,6 +173,8 @@ class InitialCustomerExpensesForm extends Component {
                     id='rent'
                     label='Monthly Rent'
                     autoFocus
+                    type='number'
+                    inputProps={{ min: "0" }}
                     onChange={this.updateState}
                   />
                 </Grid>
@@ -172,6 +187,8 @@ class InitialCustomerExpensesForm extends Component {
                     id='grocery'
                     label='Monthly Groceries'
                     autoFocus
+                    type='number'
+                    inputProps={{ min: "0" }}
                     onChange={this.updateState}
                   />
                 </Grid>
@@ -184,6 +201,8 @@ class InitialCustomerExpensesForm extends Component {
                     id='travel'
                     label='Monthly Travel'
                     autoFocus
+                    type='number'
+                    inputProps={{ min: "0" }}
                     onChange={this.updateState}
                   />
                 </Grid>
@@ -196,6 +215,8 @@ class InitialCustomerExpensesForm extends Component {
                     id='mobile'
                     label='Monthly Mobile Bill'
                     autoFocus
+                    type='number'
+                    inputProps={{ min: "0" }}
                     onChange={this.updateState}
                   />
                 </Grid>
@@ -208,6 +229,8 @@ class InitialCustomerExpensesForm extends Component {
                     id='wifi'
                     label='Monthly Wifi Bill'
                     autoFocus
+                    type='number'
+                    inputProps={{ min: "0" }}
                     onChange={this.updateState}
                   />
                 </Grid>
