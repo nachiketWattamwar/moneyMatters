@@ -11,6 +11,7 @@ const Expense = require("./models/expense");
 //Routers
 const userRouter = require("./routers/userRoutes");
 const expenseRouter = require("./routers/expenseRoutes");
+const goalsRouter = require("./routers/goalsRoutes")
 
 //Nikhil - end
 const cors = require("cors");
@@ -41,6 +42,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(userRouter);
 app.use(expenseRouter);
+app.use(goalsRouter);
 
 app.use("/recentFiveExpenses", (req, res) => {
   const recentData = [
