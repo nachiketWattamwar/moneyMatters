@@ -5,7 +5,6 @@ const goalSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        unique : true,
         required: true,
         trim: true,
         lowercase: true,
@@ -16,12 +15,17 @@ const goalSchema = new mongoose.Schema({
         }
     }, 
 
-    deadline : {
+    startdate : {
+        type: Date, 
+        required : true       
+    },
+
+    enddate : {
         type: Date, 
         required : true       
     }, 
 
-    title : {
+    name : {
         type: String, 
         required : true       
     }, 
@@ -40,9 +44,7 @@ const goalSchema = new mongoose.Schema({
 
     category : {
         type: String,
-        required: true,
         trim: true,
-        required : true,
         validate(value) {
             if(!["Education", "Retirement", "Real estate", "Vacation"].includes(value)) {
                 throw new Error("Invalid goal category type")

@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema( {
     gender : {
         type : String,
         validate(value) {
-            if(!['male' , 'female'].includes(value.toLowerCase())) {
+            if(!['male' , 'female', 'other'].includes(value.toLowerCase())) {
                 throw new Error('Invalid gender value')
             }
         }
