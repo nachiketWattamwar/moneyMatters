@@ -2,8 +2,7 @@ import React from "react";
 import "./App.css";
 import Dashboard from "./Dashboard";
 import Test from "./components/Test";
-//import Goals from "./components/Goals";
-import Goals from "./components/FinancialGoals";
+import Goals from "./components/TrackGoals";
 
 import Signup from "./components/Signup";
 import DetailFinances from "./components/DetailFinances";

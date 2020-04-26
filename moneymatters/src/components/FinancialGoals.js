@@ -55,31 +55,15 @@ const tableIcons = {
 	Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
 	SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
 	ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
-/*
-const columns = [
-	//{ title: "id", field: "id" },
-	{ title: "Name", field: "Name" },
-	{ title: "Amount", field: "Amount" },
-	{ title: "Date", field: "Date" }
-];
-
-let data = [
-	{ id: "1", Name: "Costco Co.", Amount: "$19", Date: "16 Mar, 2019" },
-	{ id: "2", Name: "PG&E", Amount: "$22", Date: "16 Mar, 2019" },
-	{ id: "3", Name: "Gas", Amount: "$22", Date: "16 Mar, 2019" },
-	{ id: "4", Name: "Medical Bills", Amount: "$220", Date: "16 Mar, 2019" },
-	{ id: "5", Name: "Pet", Amount: "$220", Date: "15 Mar, 2019" }
-];
-*/
 
 const columns = [
 	//{ title: "id", field: "id" },
 	{ title: "Name", field: "Name" },
 	{ title: "Amount", field: "Amount" },
 	{ title: "Start Date", field: "StartDate" },
-	{ title: "End Date", field: "EndDate" }
+	{ title: "End Date", field: "EndDate" },
 ];
 
 let data = [
@@ -88,22 +72,22 @@ let data = [
 		Name: "Retirement Fund",
 		Amount: "$100,000",
 		StartDate: "16 Mar, 2019",
-		EndDate: "16 Mar, 2055"
+		EndDate: "16 Mar, 2055",
 	},
 	{
 		id: "2",
 		Name: "John's College Fund",
 		Amount: "50,000",
 		StartDate: "16 Aug, 2015",
-		EndDate: "16 May, 2030"
+		EndDate: "16 May, 2030",
 	},
 	{
 		id: "3",
 		Name: "Savings for house",
 		Amount: "200,000",
 		StartDate: "10 Feb, 2019",
-		EndDate: "10 Mar, 2021"
-	}
+		EndDate: "10 Mar, 2021",
+	},
 ];
 
 export default class Goals extends Component {
@@ -117,7 +101,7 @@ export default class Goals extends Component {
 			description: "",
 			price: 0,
 			data: data, //pull from backend
-			columns: columns
+			columns: columns,
 		};
 	}
 
@@ -143,47 +127,47 @@ export default class Goals extends Component {
 									columns={this.state.columns}
 									data={this.state.data}
 									editable={{
-										onRowAdd: newData =>
-											new Promise(resolve => {
+										onRowAdd: (newData) =>
+											new Promise((resolve) => {
 												setTimeout(() => {
 													resolve();
 													newData.id = this.state.data.length + 1;
 													let temp = this.state.data.concat(newData);
 													this.setState({
-														data: temp
+														data: temp,
 													});
 													//call to the backend
 												}, 600);
 											}),
 										onRowUpdate: (newData, oldData) =>
-											new Promise(resolve => {
+											new Promise((resolve) => {
 												setTimeout(() => {
 													resolve();
 													let id = oldData.id;
 													let dataCopy = this.state.data;
-													let temp = dataCopy.map(obj =>
+													let temp = dataCopy.map((obj) =>
 														obj.id == id ? newData : obj
 													);
 													this.setState({
-														data: temp
+														data: temp,
 													});
 													//call to the backend
 												}, 600);
 											}),
-										onRowDelete: oldData =>
-											new Promise(resolve => {
+										onRowDelete: (oldData) =>
+											new Promise((resolve) => {
 												setTimeout(() => {
 													resolve();
 													console.log("inside delete", oldData);
 													let temp = this.state.data;
-													temp = temp.filter(d => d.id !== oldData.id);
+													temp = temp.filter((d) => d.id !== oldData.id);
 													console.log("newData ", temp);
 													this.setState({
-														data: temp
+														data: temp,
 													});
 													//call to the backend
 												}, 600);
-											})
+											}),
 									}}
 								/>
 							</div>
