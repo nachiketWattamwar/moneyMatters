@@ -1,58 +1,60 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
+const mongoose = require("mongoose");
+const validator = require("validator");
 
-const User = require('../models/user');
+const User = require("../models/user");
 const expenseSchema = new mongoose.Schema({
-
-    email: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error('Email is invalid')
-            }
-        }
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("Email is invalid");
+      }
     },
+  },
 
-    description : {
-        type: String,
-        trim: true
+  description: {
+    type: String,
+    trim: true,
+  },
+
+  category: {
+    type: String,
+    required: true,
+    trim: true,
+    validate(value) {
+      if (
+        !["food", "bills", "rent", "travel", "groceries"].includes(
+          value.toLowerCase()
+        )
+      ) {
+        throw new Error("Invalid expense category type");
+      }
     },
+  },
 
-    category : {
-        type: String,
-        required: true,
-        trim: true,
-        validate(value) {
-            if(!["food", "bills", "rent","travel"].includes(value.toLowerCase())) {
-                throw new Error("Invalid expense category type")
-            }
-        }
-    }, 
+  amount: {
+    type: Number,
+    required: true,
+    trim: true,
+    validate(value) {
+      if (value <= 0) {
+        throw new Error("Invalid amount value");
+      }
+    },
+  },
 
-    amount : {
-        type: Number, 
-        required : true, 
-        trim : true,
-        validate(value) {
-            if(value <= 0) {
-                throw new Error("Invalid amount value")
-            }
-        }
-    }, 
+  timestamp: {
+    type: Date,
+  },
 
-    timestamp : {
-        type : Date,
-    } , 
+  expenseType: {
+    type: String,
+    required: true,
+  },
+});
 
-    expenseType : {
-        type : String,
-        required : true
-    }
-
-})
-
-const Expense = mongoose.model('Expense' , expenseSchema);
-module.exports = Expense
+const Expense = mongoose.model("Expense", expenseSchema);
+module.exports = Expense;

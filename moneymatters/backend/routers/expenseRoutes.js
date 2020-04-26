@@ -14,7 +14,6 @@ router.post("/expenses/initial", uservalidity, async (req, res) => {
   try {
     const exp = new Expense(req.body);
     await exp.save();
-
     var objArr = [];
     const d = new Date(req.body.timestamp);
     for (let i = 0; i < 5; i++) {
@@ -22,7 +21,6 @@ router.post("/expenses/initial", uservalidity, async (req, res) => {
       temp.timestamp = new Date(d.setMonth(d.getMonth() - 1));
       objArr.push(temp);
     }
-
     Expense.collection.insertMany(objArr, (err, docs) => {
       if (err) {
         console.log("Error on batch insert", err);
@@ -30,7 +28,6 @@ router.post("/expenses/initial", uservalidity, async (req, res) => {
         console.log("Batch insert successful");
       }
     });
-
     res.status(200).send(req);
   } catch (e) {
     res.status(400).send(e);
