@@ -1,22 +1,13 @@
 import React, { Component } from "react";
-import DataTable from "react-data-table-component";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
-import TextField from "@material-ui/core/TextField";
-import DateFnsUtils from "@date-io/date-fns"; // import
-import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import MaterialTable from "material-table";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import "../scss/_mystyles.scss";
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -26,6 +17,9 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import Clear from "@material-ui/icons/Clear";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import Edit from "@material-ui/icons/Edit";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+//import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+//import ShowChartIcon from "@material-ui/icons/ShowChart";
 import FilterList from "@material-ui/icons/FilterList";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
@@ -33,6 +27,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import { createBrowserHistory } from "history";
 
 const tableIcons = {
 	Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -90,7 +85,7 @@ let data = [
 	},
 ];
 
-export default class Goals extends Component {
+export default class FinancialGoals extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -123,10 +118,34 @@ export default class Goals extends Component {
 							<div className='totalExpensesTable'>
 								<MaterialTable
 									icons={tableIcons}
+									actions={[
+										{
+											icon: () => <TrendingUpIcon />,
+											tooltip: "Track Progress",
+
+											onClick: (event, rowData) =>
+												this.props.history.push({
+													pathname: "/trackGoals",
+													search: "?query=abc",
+												}),
+										},
+									]}
 									title='Goals set by you'
 									columns={this.state.columns}
 									data={this.state.data}
 									editable={{
+										onRowTrack: (newData) =>
+											new Promise((resolve) => {
+												setTimeout(() => {
+													resolve();
+													newData.id = this.state.data.length + 1;
+													let temp = this.state.data.concat(newData);
+													this.setState({
+														data: temp,
+													});
+													//call to the backend
+												}, 600);
+											}),
 										onRowAdd: (newData) =>
 											new Promise((resolve) => {
 												setTimeout(() => {

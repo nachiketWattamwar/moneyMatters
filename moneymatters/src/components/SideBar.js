@@ -12,48 +12,48 @@ import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
 import { Link } from "react-router-dom";
 
 class SideBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
 
-  render() {
-    return (
-      <div>
-        <ListItem button>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary='Dashboard' />
-        </ListItem>
-        <ListItem button component={Link} to='/expenses'>
-          <ListItemIcon>
-            <AccountBalanceWalletIcon />
-          </ListItemIcon>
-          <ListItemText primary='Expenses' />
-        </ListItem>
+	render() {
+		return (
+			<div>
+				<ListItem button>
+					<ListItemIcon>
+						<DashboardIcon />
+					</ListItemIcon>
+					<ListItemText primary='Dashboard' />
+				</ListItem>
+				<ListItem button component={Link} to='/expenses'>
+					<ListItemIcon>
+						<AccountBalanceWalletIcon />
+					</ListItemIcon>
+					<ListItemText primary='Expenses' />
+				</ListItem>
 
-        <ListItem button component={Link} to='/detailFinances'>
-          <ListItemIcon>
-            <BarChartIcon />
-          </ListItemIcon>
-          <ListItemText primary='Reports' />
-        </ListItem>
-        <ListItem button component={Link} to='/goals'>
-          <ListItemIcon>
-            <EmojiEventsIcon />
-          </ListItemIcon>
-          <ListItemText primary='Financial Goals' />
-        </ListItem>
-        <ListItem button component={Link} to='/'>
-          <ListItemIcon>
-            <CloseIcon />
-          </ListItemIcon>
-          <ListItemText primary='Logout' />
-        </ListItem>
-      </div>
-    );
-  }
+				<ListItem button component={Link} to='/detailFinances'>
+					<ListItemIcon>
+						<BarChartIcon />
+					</ListItemIcon>
+					<ListItemText primary='Reports' />
+				</ListItem>
+				<ListItem button component={Link} to='/goals'>
+					<ListItemIcon>
+						<EmojiEventsIcon />
+					</ListItemIcon>
+					<ListItemText primary='Financial Goals' />
+				</ListItem>
+				<ListItem button component={Link} to='/'>
+					<ListItemIcon>
+						<CloseIcon />
+					</ListItemIcon>
+					<ListItemText primary='Logout' />
+				</ListItem>
+			</div>
+		);
+	}
 }
 
 export default SideBar;
