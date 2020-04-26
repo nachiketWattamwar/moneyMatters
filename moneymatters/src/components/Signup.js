@@ -3,8 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import { storepredictedvalue } from "../actions/storepredictedvalue";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -18,15 +18,6 @@ import Select from "@material-ui/core/Select";
 import axios from "axios";
 import InitialCustomerExpensesForm from "./InitialCustomerExpensesForm";
 
-function Copyright() {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {"Copyright © "}
-      <Link color='inherit'>Money Matters</Link> {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 // Higher order component is withStyles
 const useStyles = (theme) => ({
   paper: {
@@ -48,7 +39,7 @@ const useStyles = (theme) => ({
   },
 });
 
-class Signup extends Component {
+class SignupWithoutStyles extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,12 +59,12 @@ class Signup extends Component {
   }
 
   saveCustomerDetails = async () => {
-    await axios.post(`http://localhost:3001/users`, this.state);
+    const res = await axios.post(`http://localhost:3001/users`, this.state);
     this.setState({ isExpenseForm: true, isCustomerDetailsForm: false });
+    this.props.storepredictedvalue(res.data.predictedValue);
   };
 
   updateState = (e) => {
-    //console.log("E is ",e.target.value)
     switch (e.target.name) {
       case "firstName":
         this.setState({
@@ -111,8 +102,6 @@ class Signup extends Component {
 
   render() {
     const { classes } = this.props;
-    //console.log("============state in render========",this.state)
-    //console.log("=============", this.props);
     return (
       <div>
         {this.state.isCustomerDetailsForm && (
@@ -265,8 +254,7 @@ class Signup extends Component {
                       onChange={this.updateState}
                     >
                       <MenuItem value={"Student"}>Student</MenuItem>
-                      <MenuItem value={"Working"}>Working</MenuItem>
-                      <MenuItem value={"Other"}>Other</MenuItem>
+                      <MenuItem value={"Professional"}>Professional</MenuItem>
                     </Select>
                   </Grid>
                 </Grid>
@@ -298,5 +286,8 @@ class Signup extends Component {
     );
   }
 }
-
-export default withStyles(useStyles)(Signup);
+const mapDispatchToProps = (dispatch) => ({
+  storepredictedvalue: (value) => dispatch(storepredictedvalue(value)),
+});
+const Signup = withStyles(useStyles)(SignupWithoutStyles);
+export default connect(null, mapDispatchToProps)(Signup);

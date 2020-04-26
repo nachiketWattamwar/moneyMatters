@@ -7,3 +7,4 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const STORE_EMAIL = "STORE_EMAIL";
+export const STORE_VALUE = "STORE_VALUE";

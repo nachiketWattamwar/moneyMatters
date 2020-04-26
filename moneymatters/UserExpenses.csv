@@ -1,0 +1,241 @@
+﻿Name,Month,primaryIncome,Rent,Grocery,Travel,Wifi,Mobile,Total_Expenses,Country,Sex,Age,Student
+Nitish,January,2000,434,80,20,10,30,574,India,male,25,Yes
+Nitish,February,2000,434,84,21,10,30,579,India,male,25,Yes
+Nitish,March,2000,434,77,14,10,30,565,India,male,25,Yes
+Nitish,April,2000,434,70,17,10,30,561,India,male,25,Yes
+Nitish,May,2000,434,73,19,10,30,566,India,male,25,Yes
+Nitish,June,2000,434,75,15,10,30,564,India,male,25,Yes
+Nikhil,January,1600,454,80,14,10,25,583,India,male,24,Yes
+Nikhil,February,1600,454,87,15,10,25,591,India,male,24,Yes
+Nikhil,March,1600,454,67,12,10,25,568,India,male,24,Yes
+Nikhil,April,1600,454,78,16,10,25,583,India,male,24,Yes
+Nikhil,May,1600,454,74,18,10,25,581,India,male,24,Yes
+Nikhil,June,1600,454,69,14,10,25,572,India,male,24,Yes
+Nachiket,January,1500,450,59,14,10,22,555,India,male,29,Yes
+Nachiket,February,1500,450,88,16,10,22,586,India,male,29,Yes
+Nachiket,March,1500,450,81,15,10,22,578,India,male,29,Yes
+Nachiket,April,1500,450,65,15,10,22,562,India,male,29,Yes
+Nachiket,May,1500,450,69,18,10,22,569,India,male,29,Yes
+Nachiket,June,1500,450,87,14,10,22,583,India,male,29,Yes
+Jai,January,1800,490,90,16,12,30,638,India,female,27,Yes
+Jai,February,1800,490,78,,,,635,India,female,27,Yes
+Jai,March,1800,490,67,,,,645,India,female,27,Yes
+Jai,April,1800,490,87,,,,654,India,female,27,Yes
+Jai,May,1800,490,84,,,,590,India,female,27,Yes
+Jai,June,1800,490,67,,,,598,India,female,27,Yes
+Van Djik,January,5000,800,165,,,,899,India,male,28,No
+Van Djik,February,5000,800,165,,,,878,India,male,28,No
+Van Djik,March,5000,800,200,50,20,48,1118,India,male,28,No
+Van Djik,April,5000,800,187,,,,900,India,male,28,No
+Van Djik,May,5000,800,143,,,,989,India,male,28,No
+Van Djik,June,5000,800,143,,,,979,India,male,28,No
+Salah,January,4900,780,153,,,,899,India,male,27,No
+Salah,February,4900,780,187,,,,879,India,male,27,No
+Salah,March,4900,780,243,,,,956,India,male,27,No
+Salah,April,4900,780,323,,,,1023,India,male,27,No
+Salah,May,4900,780,232,,,,1032,India,male,27,No
+Salah,June,4900,780,240,45,19,54,1138,India,male,27,No
+Mane,January,4500,750,232,,,,1098,India,male,27,No
+Mane,February,4500,750,343,,,,1078,India,male,27,No
+Mane,March,4500,750,121,,,,1066,India,male,27,No
+Mane,April,4500,750,232,,,,1100,India,male,27,No
+Mane,May,4500,750,121,,,,1211,India,male,27,No
+Mane,June,4500,750,220,60,21,56,1107,India,male,27,No
+Firmino,January,4400,760,121,,,,890,India,male,29,No
+Firmino,February,4400,760,233,,,,907,India,male,29,No
+Firmino,March,4400,760,142,,,,904,India,male,29,No
+Firmino,April,4400,760,314,,,,940,India,male,29,No
+Firmino,May,4400,760,121,,,,950,India,male,29,No
+Firmino,June,4400,760,210,76,22,56,1124,India,male,29,No
+Henderson,January,4000,720,189,,,,1123,England,male,31,No
+Henderson,February,4000,720,197,,,,1145,England,male,31,No
+Henderson,March,4000,720,177,,,,908,England,male,31,No
+Henderson,April,4000,720,178,,,,980,England,male,31,No
+Henderson,May,4000,720,186,,,,970,England,male,31,No
+Henderson,June,4000,720,205,56,25,48,1054,England,male,31,No
+Gini,January,4100,710,167,,,,1120,England,male,30,No
+Gini,February,4100,710,166,,,,1140,England,male,30,No
+Gini,March,4100,710,165,,,,1211,England,male,30,No
+Gini,April,4100,710,174,,,,1009,England,male,30,No
+Gini,May,4100,710,156,,,,987,England,male,30,No
+Gini,June,4100,710,180,46,19,51,1006,England,male,30,No
+Milner,January,3500,690,156,,,,980,England,male,34,No
+Milner,February,3500,690,167,,,,999,England,male,34,No
+Milner,March,3500,690,156,,,,907,England,male,34,No
+Milner,April,3500,690,155,,,,1222,England,male,34,No
+Milner,May,3500,690,144,,,,1431,England,male,34,No
+Milner,June,3500,690,190,56,18,53,1007,England,male,34,No
+Lallana,January,3500,700,233,,,,1009,England,male,32,No
+Lallana,February,3500,700,245,,,,908,England,male,32,No
+Lallana,March,3500,700,234,,,,903,England,male,32,No
+Lallana,April,3500,700,222,,,,907,England,male,32,No
+Lallana,May,3500,700,212,,,,956,England,male,32,No
+Lallana,June,3500,700,170,78,20,56,1024,England,male,32,No
+Keita,January,4300,725,211,,,,1066,England,male,26,No
+Keita,February,4300,725,123,,,,1056,England,male,26,No
+Keita,March,4300,725,213,,,,1098,England,male,26,No
+Keita,April,4300,725,232,,,,1745,England,male,26,No
+Keita,May,4300,725,222,,,,1478,England,male,26,No
+Keita,June,4300,725,222,65,20,45,1045,England,male,26,No
+Gomez,January,3800,685,232,,,,1122,England,male,23,No
+Gomez,February,3800,685,242,,,,1200,England,male,23,No
+Gomez,March,3800,685,224,,,,1098,England,male,23,No
+Gomez,April,3800,685,252,,,,1700,England,male,23,No
+Gomez,May,3800,685,254,,,,907,England,male,23,No
+Gomez,June,3800,685,210,58,20,57,1030,England,male,23,No
+Arnold,January,4000,680,152,,,,2300,England,male,22,No
+Arnold,February,4000,680,151,,,,2009,England,male,22,No
+Arnold,March,4000,680,155,,,,1289,England,male,22,No
+Arnold,April,4000,680,144,,,,1976,England,male,22,No
+Arnold,May,4000,680,145,,,,1678,England,male,22,No
+Arnold,June,4000,680,200,49,21,54,1845,England,male,22,No
+Robertson,January,3900,700,156,,,,1200,England,male,25,No
+Robertson,February,3900,700,189,,,,1400,England,male,25,No
+Robertson,March,3900,700,178,,,,1450,England,male,25,No
+Robertson,April,3900,700,177,,,,1500,England,male,25,No
+Robertson,May,3900,700,167,,,,1543,England,male,25,No
+Robertson,June,3900,700,220,67,22,48,1534,England,male,25,No
+Origi,January,4200,740,188,,,,1908,England,male,24,No
+Origi,February,4200,740,198,,,,1807,England,male,24,No
+Origi,March,4200,740,100,,,,1601,England,male,24,No
+Origi,April,4200,740,188,,,,987,England,male,24,No
+Origi,May,4200,740,177,,,,809,England,male,24,No
+Origi,June,4200,740,240,46,25,44,1095,England,male,24,No
+Allison,January,4750,730,232,,,,907,Canada,male,27,No
+Allison,February,4750,730,232,,,,1098,Canada,male,27,No
+Allison,March,4750,730,222,,,,1089,Canada,male,27,No
+Allison,April,4750,730,235,,,,1084,Canada,male,27,No
+Allison,May,4750,730,289,,,,1430,Canada,male,27,No
+Allison,June,4750,730,200,55,27,53,1065,Canada,male,27,No
+Adrian,January,3750,700,287,,,,1302,Canada,male,31,No
+Adrian,February,3750,700,287,,,,1389,Canada,male,31,No
+Adrian,March,3750,700,298,,,,1789,Canada,male,31,No
+Adrian,April,3750,700,267,,,,1782,Canada,male,31,No
+Adrian,May,3750,700,266,,,,1213,Canada,male,31,No
+Adrian,June,3750,700,195,77,22,52,1046,Canada,male,31,No
+Minamino,January,3800,710,277,,,,1231,Canada,male,23,No
+Minamino,February,3800,710,244,,,,1323,Canada,male,23,No
+Minamino,March,3800,710,255,,,,1414,Canada,male,23,No
+Minamino,April,3800,710,266,,,,1451,Canada,male,23,No
+Minamino,May,3800,710,266,,,,1153,Canada,male,23,No
+Minamino,June,3800,710,185,66,20,55,1036,Canada,male,23,No
+Fabinho,January,4250,740,254,,,,1232,Canada,male,26,No
+Fabinho,February,4250,740,245,,,,1534,Canada,male,26,No
+Fabinho,March,4250,740,232,,,,1543,Canada,male,26,No
+Fabinho,April,4250,740,233,,,,1544,Canada,male,26,No
+Fabinho,May,4250,740,244,,,,1232,Canada,male,26,No
+Fabinho,June,4250,740,190,53,20,48,1051,Canada,male,26,No
+Shaqiri,January,4000,705,254,,,,1556,Canada,male,30,No
+Shaqiri,February,4000,705,244,,,,1654,Canada,male,30,No
+Shaqiri,March,4000,705,242,,,,1123,Canada,male,30,No
+Shaqiri,April,4000,705,243,,,,1654,Canada,male,30,No
+Shaqiri,May,4000,705,244,,,,1908,Canada,male,30,No
+Shaqiri,June,4000,705,210,81,19,49,1064,Canada,male,30,No
+Klopp,January,3000,650,322,,,,1781,Canada,male,52,No
+Klopp,February,3000,650,311,,,,1098,Canada,male,52,No
+Klopp,March,3000,650,122,,,,1097,Canada,male,52,No
+Klopp,April,3000,650,144,,,,1778,Canada,male,52,No
+Klopp,May,3000,650,155,,,,1096,Canada,male,52,No
+Klopp,June,3000,650,215,73,17,48,1003,Canada,male,52,No
+Gerrard,January,6000,900,221,,,,1009,England,male,40,No
+Gerrard,February,6000,900,221,,,,1008,England,male,40,No
+Gerrard,March,6000,900,222,,,,1789,England,male,40,No
+Gerrard,April,6000,900,244,,,,1987,England,male,40,No
+Gerrard,May,6000,900,144,,,,1990,England,male,40,No
+Gerrard,June,6000,900,220,84,18,49,1271,England,male,40,No
+Carra,January,5500,850,190,,,,1542,England,male,42,No
+Carra,February,5500,850,199,,,,1231,England,male,42,No
+Carra,March,5500,850,187,,,,1231,England,male,42,No
+Carra,April,5500,850,177,,,,1231,England,male,42,No
+Carra,May,5500,850,187,,,,1231,England,male,42,No
+Carra,June,5500,850,230,67,19,47,1213,England,male,42,No
+Aishwarya,January,7000,1050,189,,,,2331,India,female,47,No
+Aishwarya,February,7000,1050,199,,,,2321,India,female,47,No
+Aishwarya,March,7000,1050,197,,,,2312,India,female,47,No
+Aishwarya,April,7000,1050,197,,,,2421,India,female,47,No
+Aishwarya,May,7000,1050,178,,,,2423,India,female,47,No
+Aishwarya,June,7000,1050,188,,,,3434,India,female,47,No
+Illeana,January,6500,1100,199,,,,3422,India,female,37,No
+Illeana,February,6500,1100,190,,,,1232,India,female,37,No
+Illeana,March,6500,1100,167,,,,908,India,female,37,No
+Illeana,April,6500,1100,175,,,,956,India,female,37,No
+Illeana,May,6500,1100,158,,,,1334,India,female,37,No
+Illeana,June,6500,1100,159,,,,1234,India,female,37,No
+Gal,January,4800,1200,164,,,,1534,India,female,35,No
+Gal,February,4800,1200,149,,,,1534,India,female,35,No
+Gal,March,4800,1200,148,,,,1546,India,female,35,No
+Gal,April,4800,1200,148,,,,2653,India,female,35,No
+Gal,May,4800,1200,190,,,,1233,India,female,35,No
+Gal,June,4800,1200,211,,,,1231,India,female,35,No
+Disha,January,9000,1300,200,,,,1545,India,female,28,No
+Disha,February,9000,1300,201,,,,1645,India,female,28,No
+Disha,March,9000,1300,202,,,,1654,India,female,28,No
+Disha,April,9000,1300,200,,,,2343,India,female,28,No
+Disha,May,9000,1300,213,,,,1434,India,female,28,No
+Disha,June,9000,1300,221,,,,1535,India,female,28,No
+Courtney,January,3000,900,214,,,,1232,United States,female,51,No
+Courtney,February,3000,900,215,,,,1654,United States,female,51,No
+Courtney,March,3000,900,223,,,,1232,United States,female,51,No
+Courtney,April,3000,900,243,,,,1231,United States,female,51,No
+Courtney,May,3000,900,233,,,,1654,United States,female,51,No
+Courtney,June,3000,900,255,,,,1424,United States,female,51,No
+Alexandra,January,5000,950,233,,,,1232,United States,female,32,No
+Alexandra,February,5000,950,232,,,,1232,United States,female,32,No
+Alexandra,March,5000,950,231,,,,1444,United States,female,32,No
+Alexandra,April,5000,950,201,,,,1222,United States,female,32,No
+Alexandra,May,5000,950,209,,,,1223,United States,female,32,No
+Alexandra,June,5000,950,210,,,,1333,United States,female,32,No
+Kaley,January,4000,900,211,,,,1555,United States,female,35,No
+Kaley,February,4000,900,232,,,,1666,United States,female,35,No
+Kaley,March,4000,900,200,,,,1777,United States,female,35,No
+Kaley,April,4000,900,189,,,,1888,United States,female,35,No
+Kaley,May,4000,900,299,,,,1999,United States,female,35,No
+Kaley,June,4000,900,231,,,,2111,United States,female,35,No
+Henry,January,3800,800,198,,,,2223,United States,male,43,No
+Henry,February,3800,800,197,,,,2323,United States,male,43,No
+Henry,March,3800,800,179,,,,2113,United States,male,43,No
+Henry,April,3800,800,149,,,,1223,United States,male,43,No
+Henry,May,3800,800,156,,,,2313,United States,male,43,No
+Henry,June,3800,800,,,,,1234,United States,male,43,No
+Messi,January,9500,1400,,,,,1421,United States,male,32,No
+Messi,February,9500,1400,,,,,1231,United States,male,32,No
+Messi,March,9500,1400,,,,,1234,United States,male,32,No
+Messi,April,9500,1400,,,,,4643,United States,male,32,No
+Messi,May,9500,1400,,,,,2345,United States,male,32,No
+Messi,June,9500,1400,,,,,2434,United States,male,32,No
+Ronaldo,January,9800,1500,,,,,2345,United States,male,34,No
+Ronaldo,February,9800,1500,,,,,2342,United States,male,34,No
+Ronaldo,March,9800,1500,,,,,2342,United States,male,34,No
+Ronaldo,April,9800,1500,,,,,1231,United States,male,34,No
+Ronaldo,May,9800,1500,,,,,2342,United States,male,34,No
+Ronaldo,June,9800,1500,,,,,2342,United States,male,34,No
+Agger,January,3200,700,,,,,1313,United States,male,38,No
+Agger,February,3200,700,,,,,1231,United States,male,38,No
+Agger,March,3200,700,,,,,1233,United States,male,38,No
+Agger,April,3200,700,,,,,900,United States,male,38,No
+Agger,May,3200,700,,,,,987,United States,male,38,No
+Agger,June,3200,700,,,,,977,United States,male,38,No
+Nesta,January,4000,800,,,,,787,United States,male,48,No
+Nesta,February,4000,800,,,,,978,United States,male,48,No
+Nesta,March,4000,800,,,,,678,United States,male,48,No
+Nesta,April,4000,800,,,,,989,United States,male,48,No
+Nesta,May,4000,800,,,,,789,United States,male,48,No
+Nesta,June,4000,800,,,,,789,United States,male,48,No
+Gilchrist,January,3600,850,,,,,989,United States,male,49,No
+Gilchrist,February,3600,850,,,,,999,United States,male,49,No
+Gilchrist,March,3600,850,,,,,1423,United States,male,49,No
+Gilchrist,April,3600,850,,,,,2344,United States,male,49,No
+Gilchrist,May,3600,850,,,,,1212,United States,male,49,No
+Gilchrist,June,3600,850,,,,,976,United States,male,49,No
+Edge,January,5400,900,,,,,950,Canada,male,46,No
+Edge,February,5400,900,,,,,904,Canada,male,46,No
+Edge,March,5400,900,,,,,905,Canada,male,46,No
+Edge,April,5400,900,,,,,906,Canada,male,46,No
+Edge,May,5400,900,,,,,906,Canada,male,46,No
+Edge,June,5400,900,,,,,2341,Canada,male,46,No
+Kuyt,January,4700,750,,,,,1212,Canada,male,37,No
+Kuyt,February,4700,750,,,,,1231,Canada,male,37,No
+Kuyt,March,4700,750,,,,,1231,Canada,male,37,No
+Kuyt,April,4700,750,,,,,1431,Canada,male,37,No
+Kuyt,May,4700,750,,,,,1122,Canada,male,37,No
+Kuyt,June,4700,750,,,,,1222,Canada,male,37,No
