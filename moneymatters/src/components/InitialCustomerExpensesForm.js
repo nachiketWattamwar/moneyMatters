@@ -41,12 +41,13 @@ const useStyles = (theme) => ({
 class InitialCustomerExpensesForm extends Component {
   constructor(props) {
     super(props);
+    //"food", "bills", "rent", "travel", "groceries";
     this.state = {
       rent: null,
-      grocery: null,
-      wifi: null,
+      food: null,
+      groceries: null,
       travel: null,
-      mobile: null,
+      bills: null,
       popup: true,
       //data:null,
     };
@@ -68,17 +69,17 @@ class InitialCustomerExpensesForm extends Component {
       case "rent":
         this.setState({ rent: e.target.value });
         break;
-      case "grocery":
-        this.setState({ grocery: e.target.value });
+      case "food":
+        this.setState({ food: e.target.value });
         break;
-      case "wifi":
-        this.setState({ wifi: e.target.value });
+      case "groceries":
+        this.setState({ groceries: e.target.value });
         break;
       case "travel":
         this.setState({ travel: e.target.value });
         break;
-      case "mobile":
-        this.setState({ mobile: e.target.value });
+      case "bills":
+        this.setState({ bills: e.target.value });
         break;
       default:
       // console.log("inside default");
@@ -127,19 +128,19 @@ class InitialCustomerExpensesForm extends Component {
     console.log("=======>", initialData);
     //console.log("inside intial expenses data==========", initialExpenses);
 
-    for (let i = 0; i < 5; i++) {
-      if (data.password !== data.confirmPassword)
-        console.log("passwords do not match");
-      else {
-        console.log("inisde api calls ", initialData[i]);
-        const firstResponse = await axios.post(
-          "http://localhost:3001/expenses/initial",
-          initialData[i]
-        );
+    const firstResponse = await axios.post(
+      "http://localhost:3001/expenses/initial",
+      initialData
+    );
+    // for (let i = 0; i < 5; i++) {
+    //   if (data.password !== data.confirmPassword)
+    //     console.log("passwords do not match");
+    //   else {
+    //     console.log("inisde api calls ", initialData[i]);
 
-        console.log("inside 2nd api call========", firstResponse);
-      }
-    }
+    //     console.log("inside 2nd api call========", firstResponse);
+    //   }
+    // }
   };
 
   if(isAuthenticated) {
@@ -196,11 +197,11 @@ class InitialCustomerExpensesForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    name='grocery'
+                    name='groceries'
                     variant='outlined'
                     required
                     fullWidth
-                    id='grocery'
+                    id='groceries'
                     label='Monthly Groceries'
                     autoFocus
                     type='number'
@@ -224,11 +225,11 @@ class InitialCustomerExpensesForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    name='mobile'
+                    name='bills'
                     variant='outlined'
                     required
                     fullWidth
-                    id='mobile'
+                    id='bills'
                     label='Monthly Mobile Bill'
                     autoFocus
                     type='number'
@@ -238,11 +239,11 @@ class InitialCustomerExpensesForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    name='wifi'
+                    name='food'
                     variant='outlined'
                     required
                     fullWidth
-                    id='wifi'
+                    id='food'
                     label='Monthly Wifi Bill'
                     autoFocus
                     type='number'
