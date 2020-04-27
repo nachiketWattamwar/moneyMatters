@@ -57,6 +57,7 @@ const columns = [
 	//{ title: "id", field: "id" },
 	{ title: "Name", field: "Name" },
 	{ title: "Amount", field: "Amount" },
+	{ title: "Savings %", field: "Share" },
 	{ title: "Start Date", field: "StartDate" },
 	{ title: "End Date", field: "EndDate" },
 ];
@@ -66,21 +67,24 @@ let data = [
 		id: "1",
 		Name: "Retirement Fund",
 		Amount: "$100,000",
-		StartDate: "16 Mar, 2019",
-		EndDate: "16 Mar, 2055",
+		Share: "20",
+		StartDate: "1 Mar, 2020",
+		EndDate: "1 Mar, 2055",
 	},
 	{
 		id: "2",
 		Name: "John's College Fund",
 		Amount: "50,000",
-		StartDate: "16 Aug, 2015",
-		EndDate: "16 May, 2030",
+		Share: "40",
+		StartDate: "1 Mar, 2020",
+		EndDate: "1 May, 2030",
 	},
 	{
 		id: "3",
 		Name: "Savings for house",
 		Amount: "200,000",
-		StartDate: "10 Feb, 2019",
+		Share: "40",
+		StartDate: "1 Mar, 2020",
 		EndDate: "10 Mar, 2021",
 	},
 ];
@@ -126,7 +130,7 @@ export default class FinancialGoals extends Component {
 											onClick: (event, rowData) =>
 												this.props.history.push({
 													pathname: "/trackGoals",
-													search: "?query=abc",
+													search: "?goalId=" + rowData.id,
 												}),
 										},
 									]}

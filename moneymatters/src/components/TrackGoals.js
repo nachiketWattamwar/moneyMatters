@@ -7,13 +7,24 @@ import Typography from "@material-ui/core/Typography";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class TrackGoals extends Component {
+	constructor(props) {
+		super(props);
+
+		let search = window.location.search;
+		let params = new URLSearchParams(search);
+		let goalId = params.get("goalId");
+		console.log(goalId);
+	}
+	//all hardcodings
+	//get id from props
+	//fetch data <-> id and display tracking
 	render() {
 		const options = {
 			animationEnabled: true,
 			exportEnabled: true,
 			theme: "light2",
 			title: {
-				text: "John's College Fund	",
+				text: "John's College Fund	", //can change
 			},
 			axisY: {
 				title: "Savings ($)",
@@ -25,6 +36,7 @@ class TrackGoals extends Component {
 				interval: 1,
 			},
 			data: [
+				//can change
 				{
 					type: "line",
 					toolTipContent: "Month {x}: ${y}",
@@ -32,12 +44,12 @@ class TrackGoals extends Component {
 					includeZero: true,
 					legendText: "Expected Savings",
 					dataPoints: [
-						{ label: "Jan", y: 1000 },
-						{ label: "Feb", y: 2000 },
-						{ label: "Mar", y: 3000 },
-						{ label: "Apr", y: 4000 },
-						{ label: "May", y: 5000 },
-						{ label: "Jun", y: 6000 },
+						{ label: "Mar", y: 1000 },
+						{ label: "Apr", y: 2000 },
+						{ label: "May", y: 3000 },
+						{ label: "Jun", y: 4000 },
+						{ label: "Jul", y: 5000 },
+						{ label: "Aug", y: 6000 },
 					],
 				},
 				{
@@ -46,12 +58,12 @@ class TrackGoals extends Component {
 					showInLegend: true,
 					legendText: "Predicted Savings",
 					dataPoints: [
-						{ label: "Jan", y: 1100 },
-						{ label: "Feb", y: 1900 },
-						{ label: "Mar", y: 2500 },
-						{ label: "Apr", y: 3700 },
-						{ label: "May", y: 4900 },
-						{ label: "Jun", y: 5500 },
+						{ label: "Mar", y: 1100 },
+						{ label: "Apr", y: 1900 },
+						{ label: "May", y: 2500 },
+						{ label: "Jun", y: 3700 },
+						{ label: "Jul", y: 4900 },
+						{ label: "Aug", y: 5500 },
 					],
 				},
 				{
@@ -60,8 +72,8 @@ class TrackGoals extends Component {
 					showInLegend: true,
 					legendText: "Actual Savings",
 					dataPoints: [
-						{ label: "Jan", y: 800 },
-						{ label: "Feb", y: 2050 },
+						{ label: "Mar", y: 800 },
+						{ label: "Apr", y: 2050 },
 					],
 				},
 			],
