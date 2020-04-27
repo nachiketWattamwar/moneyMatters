@@ -106,7 +106,7 @@ export default function MainContent(props) {
           {/* Recent Deposits */}
           <Grid item xs={12} md={4} lg={3}>
             <Paper className={fixedHeightPaper}>
-              <Deposits />
+              <Deposits email={props} />
             </Paper>
           </Grid>
           {/* Recent Expenses */}

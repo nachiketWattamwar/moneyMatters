@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import MaterialTable from "material-table";
 import "../scss/_mystyles.scss";
 import { forwardRef } from "react";
-import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
+import axios from "axios";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Check from "@material-ui/icons/Check";
@@ -55,11 +55,11 @@ const tableIcons = {
 
 const columns = [
   //{ title: "id", field: "id" },
-  { title: "Name", field: "Name" },
-  { title: "Amount", field: "Amount" },
-  { title: "Savings %", field: "Share" },
-  { title: "Start Date", field: "StartDate" },
-  { title: "End Date", field: "EndDate" },
+  { title: "Name", field: "name" },
+  { title: "Amount", field: "amount", type: "numeric" },
+  { title: "Savings %", field: "share", type: "numeric" },
+  { title: "Start Date", field: "startdate", type: "date" },
+  { title: "End Date", field: "enddate", type: "date" },
 ];
 
 let data = [
@@ -67,21 +67,29 @@ let data = [
     id: "1",
     Name: "Retirement Fund",
     Amount: "$100,000",
-    Share: "10",
+    Share: "20",
     StartDate: "1 Mar, 2020",
     EndDate: "1 Mar, 2055",
   },
   {
     id: "2",
-    Name: "Savings for house",
-    Amount: "$200,000",
-    Share: "60",
+    Name: "John's College Fund",
+    Amount: "50,000",
+    Share: "40",
     StartDate: "1 Mar, 2020",
-    EndDate: "10 Mar, 2022",
+    EndDate: "1 May, 2030",
+  },
+  {
+    id: "3",
+    Name: "Savings for house",
+    Amount: "200,000",
+    Share: "40",
+    StartDate: "1 Mar, 2020",
+    EndDate: "10 Mar, 2021",
   },
 ];
 
-export default class FinancialGoals extends Component {
+class FinancingGoals extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,6 +104,22 @@ export default class FinancialGoals extends Component {
     };
   }
 
+  componentWillMount() {
+    const expenseData = {
+      email: this.props.email.email, //done
+    };
+    console.log("=====inside financing goals email ", expenseData);
+    axios.post(`http://localhost:3001/allgoals`, expenseData).then((res) => {
+      console.log("after axios call ", res.data);
+      //newData.id = res.data._id;
+      //let temp = this.state.data.concat(newData);
+      this.setState({
+        data: res.data,
+        email: this.props.email.email,
+      });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -103,7 +127,7 @@ export default class FinancialGoals extends Component {
           <AppBar position='static'>
             <Toolbar>
               <Typography variant='h6' className='title'>
-                Financial Goals
+                Financing Goals new
               </Typography>
             </Toolbar>
           </AppBar>
@@ -123,6 +147,7 @@ export default class FinancialGoals extends Component {
                         this.props.history.push({
                           pathname: "/trackingGoals",
                           search: "?goalId=" + rowData.id,
+                          state: { rowData },
                         }),
                     },
                   ]}
@@ -146,12 +171,32 @@ export default class FinancialGoals extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-                          newData.id = this.state.data.length + 1;
-                          let temp = this.state.data.concat(newData);
-                          this.setState({
-                            data: temp,
-                          });
+                          // newData.id = this.state.data.length + 1;
+                          // let temp = this.state.data.concat(newData);
+                          // this.setState({
+                          //   data: temp,
+                          // });
                           //call to the backend
+                          console.log("newData is ", newData);
+                          const expenseData = {
+                            email: this.props.email.email, //done
+                            startdate: newData.startdate, // done
+                            enddate: newData.enddate, //done
+                            amount: newData.amount, //done
+                            name: newData.name, //done
+                            //savings: newData.expenseType, //done
+                          };
+                          console.log("sending new data ", expenseData);
+                          axios
+                            .post(`http://localhost:3001/goals`, expenseData)
+                            .then((res) => {
+                              console.log("after axios call ", res.data);
+                              newData.id = res.data._id;
+                              let temp = this.state.data.concat(newData);
+                              this.setState({
+                                data: temp,
+                              });
+                            });
                         }, 600);
                       }),
                     onRowUpdate: (newData, oldData) =>
@@ -193,3 +238,9 @@ export default class FinancialGoals extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  email: state.storeemail,
+});
+
+export default connect(mapStateToProps)(FinancingGoals);

@@ -1,36 +1,47 @@
 /* eslint-disable no-script-url */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
-import { connect } from "react-redux";
-import { getRecentExpense } from "../actions/recentexpense";
+import axios from "axios";
 const useStyles = makeStyles({
   depositContext: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
-const Deposits = ({ recentexpense, getRecentExpense }) => {
+const Deposits = (props) => {
+  const [prediction, getPrediction] = useState(0);
+  //const [recentData, setrecentData] = useState(Date.now);
   useEffect(() => {
-    getRecentExpense();
+    //getRecentExpense();
+    const expenseData = {
+      email: props.email.email, //done
+    };
+    //console.log("========deposits and expenseData", expenseData);
+    axios.post(`http://localhost:3001/prediction`, expenseData).then((res) => {
+      console.log("after axios call ", res.data[0]);
+      //newData.id = res.data._id;
+      //let temp = this.state.data.concat(newData);
+      getPrediction(res.data[0]);
+    });
   }, []);
   const classes = useStyles();
   const bal = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD"
+    currency: "USD",
   });
 
   return (
     <React.Fragment>
-      <Title>Recent Expense</Title>
+      <Title>Upcoming expense prediction</Title>
       <Typography component='p' variant='h4'>
-        {bal.format(recentexpense.recentExpense)}
+        {bal.format(prediction)}
       </Typography>
-      <Typography color='textSecondary' className={classes.depositContext}>
+      {/* <Typography color='textSecondary' className={classes.depositContext}>
         on 15 March, 2019
-      </Typography>
+      </Typography> */}
       <div>
         <Link color='primary' to='/expenses'>
           View expenses
@@ -40,8 +51,4 @@ const Deposits = ({ recentexpense, getRecentExpense }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  recentexpense: state.recentexpense
-});
-
-export default connect(mapStateToProps, { getRecentExpense })(Deposits);
+export default Deposits;

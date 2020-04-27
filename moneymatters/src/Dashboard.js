@@ -19,6 +19,10 @@ import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import CloseIcon from "@material-ui/icons/Close";
 import Icon from "@material-ui/core/Icon";
+import spawn from "child_process";
+import { useEffect } from "react";
+import csvWriterCustom from "csv-writer";
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -116,6 +120,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(props) {
   //console.log("inside dashborad compo ", props.location.state.email);
+
+  useEffect(() => {
+    // const pyprocess = spawn("python", [
+    //   "C:/Users/Nachi/Documents/GitHub/masters295/MoneyMatters/moneymatters/PFMP.py",
+    //   `${props.location.state.email}.csv`,
+    // ]);
+    // pyprocess.stdout.on("data", async (data) => {
+    //   const predictedValue = data.toString();
+    //   console.log("predicted value is in UI ", predictedValue);
+    // });
+    axios.get(`http://localhost:3001/prediction`).then((res) => {
+      console.log("after axios call ", res.data);
+      //newData.id = res.data._id;
+      //let temp = this.state.data.concat(newData);
+    });
+  }, []);
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [openSnackbar, setOpenSnackbar] = React.useState(true);

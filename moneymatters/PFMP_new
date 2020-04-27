@@ -1,80 +1,129 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[1]:
 
-import sys
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import random
 
-df = pd.read_csv("UserExpenses.csv")
+
+# In[2]:
+
+
+df = pd.read_csv("C:/Users/nitis/Downloads/MoneyMatters/User Expenses.csv")
+
+
+# In[4]:
+
+
 sex_dummy = pd.get_dummies(df['Sex'])
+
+
+# In[5]:
+
+
 df = pd.concat([df, sex_dummy], axis=1)
+
+
+# In[8]:
+
+
 df = df.drop(['Sex'], axis=1)
+
+
+# In[9]:
+
+
 student_dummy = pd.get_dummies(df['Student'])
+
+
+# In[10]:
+
+
 df = pd.concat([df, student_dummy], axis=1)
+
+
+# In[13]:
+
 
 df.rename(columns={'No': 'Professional',
              'Yes': 'Students'}, inplace=True)
 
 
-
+# In[15]:
 
 
 df = df.drop(['Student'], axis=1)
 
 
-
+# In[18]:
 
 
 country_dummy = pd.get_dummies(df['Country'])
 
 
+# In[19]:
 
 
 df = pd.concat([df, country_dummy], axis=1)
 
 
-
+# In[21]:
 
 
 df = df.drop(['Country'], axis=1)
 
 
+# In[23]:
 
 
 month_dummy = pd.get_dummies(df['Month'])
 
 
-
+# In[24]:
 
 
 df = pd.concat([df, month_dummy], axis=1)
 
 
+# In[26]:
+
 
 df = df.drop(['Month'], axis=1)
 
 
+# In[29]:
 
 
 from sklearn.model_selection import train_test_split
 
 
-X = df[['primaryIncome', 'Age', 'female', 'male',
+# In[30]:
+
+
+X = df[['Primary_Income', 'Age', 'female', 'male',
    'Professional','Students','Canada',
    'England','India','United States',
    'April', 'February', 'January', 'June', 'March', 'May']]
 
 
+# In[31]:
+
 
 y = df['Total_Expenses']
 
 
+# In[32]:
+
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4)
 
+
+# In[37]:
 
 
 from sklearn.linear_model import LinearRegression
@@ -82,55 +131,78 @@ lm = LinearRegression()
 lm = lm.fit(X_train,y_train)
 
 
+# In[39]:
+
 
 coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
 
 
+# In[41]:
+
 
 predictions = lm.predict(X_test)
 
+
+# In[44]:
 
 
 df["Total_Expenses"]=np.log(df['Total_Expenses'])
 
 
-
+# In[46]:
 
 
 coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
 
+
+# In[48]:
 
 
 y = df['Total_Expenses']
 
 
-
+# In[49]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4)
 
 
+# In[51]:
 
 
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
 lm = lm.fit(X_train,y_train)
+
+
+# In[53]:
+
+
 coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
+
+
+# In[55]:
+
 
 predictions = lm.predict(X_test)
 
-dfnew = pd.read_csv(sys.argv[1])
-#print(sys.argv[1])
+
+# In[60]:
+
+
+dfnew = pd.read_csv("C:/Users/nitis/Downloads/MoneyMatters/test.csv")
+
+
+# In[61]:
+
+
 TotalExp = lm.predict(dfnew)*100
-# TotalExp = lm.predict(dfnew)*100
-# TotalExp = lm.predict(dfnew)*100
-# TotalExp = lm.predict(dfnew)*100
-# TotalExp = lm.predict(dfnew)*100
-# TotalExp = lm.predict(dfnew)*100
-# finalAns = []
-# for i in range(0,6):
-#        finalAns.append(lm.predict(dfnew)*100)
-       
 
-print(TotalExp)
 
+# In[64]:
+
+outputList = []
+for i in range(0, 6):
+    outputList.append(random.uniform(TotalExp - 25, TotalExp + 25))
+
+print(outputList)
