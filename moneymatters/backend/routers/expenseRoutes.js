@@ -10,25 +10,30 @@ const uservalidity = require("../middleware/uservalidity");
 /*
  * Create inital average expenses on signup
  */
-router.post("/expenses/initial", uservalidity, async (req, res) => {
+router.post("/expenses/initial", async (req, res) => {
   try {
-    const exp = new Expense(req.body);
+    //const exp = new Expense(req.body);
     console.log("=======expenses ", req.body);
-    await exp.save();
-    var objArr = [];
-    const d = new Date(req.body.timestamp);
-    for (let i = 0; i < 5; i++) {
-      const temp = new Expense(req.body);
-      temp.timestamp = new Date(d.setMonth(d.getMonth() - 1));
-      objArr.push(temp);
-    }
-    Expense.collection.insertMany(objArr, (err, docs) => {
-      if (err) {
-        console.log("Error on batch insert", err);
-      } else {
-        console.log("Batch insert successful");
+
+    //await exp.save();
+
+    req.body.map((x) => {
+      var objArr = [];
+      const d = new Date(x.timestamp);
+      for (let i = 0; i < 5; i++) {
+        const temp = new Expense(x);
+        temp.timestamp = new Date(d.setMonth(d.getMonth() - 1));
+        objArr.push(temp);
       }
+      Expense.collection.insertMany(objArr, (err, docs) => {
+        if (err) {
+          console.log("Error on batch insert", err);
+        } else {
+          console.log("Batch insert successful");
+        }
+      });
     });
+
     res.status(200).send(req);
   } catch (e) {
     res.status(400).send(e);
