@@ -19,8 +19,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MaterialTable from "material-table";
-import Title from "./Title";
-import { getRecentExpensesFive } from "../actions/recentexpense";
 import { connect } from "react-redux";
 
 const tableIcons = {
@@ -49,40 +47,40 @@ const tableIcons = {
 
 const columns = [
   //{ title: "id", field: "id" },
-  { title: "Description", field: "Description", type: "string" },
-  { title: "Category (Bill,Rent,Food)", field: "Category", type: "string" },
-  { title: "ExpenseType", field: "ExpenseType", type: "string" },
-  { title: "Amount (in $)", field: "Amount", type: "numeric" },
-  { title: "Date", field: "Date", type: "date" },
+  { title: "Description", field: "description", type: "string" },
+  { title: "Category (Bill,Rent,Food)", field: "category", type: "string" },
+  { title: "ExpenseType", field: "expenseType", type: "string" },
+  { title: "Amount (in $)", field: "amount", type: "numeric" },
+  { title: "Date", field: "timestamp", type: "date" },
 ];
 
 class Orders extends Component {
   constructor(props) {
     super(props);
+    console.log("inside recentExp ", this.props);
     this.state = {
       rows: null,
+      columns: columns,
     };
   }
-  componentDidMount() {
-    //this.props.getRecentExpensesFive();
+  componentWillMount() {
     const expenseData = {
       email: this.props.email.email, //done
     };
-    axios.get(`http://localhost:3001/expenses`, expenseData).then((res) => {
-      console.log("after axios call ", res.data);
+    console.log("========inside cdm ", expenseData);
+    axios.post(`http://localhost:3001/allexpenses`, expenseData).then((res) => {
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
+      const sortedData = res.data.reverse();
+
       this.setState({
-        data: res.data,
+        data: sortedData,
       });
+
+      console.log("=====", sortedData);
     });
   }
   render() {
-    //const { recentexpense } = this.props;
-    //let { rows } = this.state;
-    //rows = recentexpense.recentExpensesFive;
-    //console.log("==================", rows);
-
     return (
       <React.Fragment>
         <MaterialTable
@@ -90,6 +88,7 @@ class Orders extends Component {
           title='Recent Expenses'
           columns={this.state.columns}
           data={this.state.data}
+          sort
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve) => {
@@ -178,10 +177,11 @@ class Orders extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  email: state.storeemail,
-});
-const mapDispatchToProps = (dispatch) => ({
-  getRecentExpensesFive: () => dispatch(getRecentExpensesFive()),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+// const mapStateToProps = (state) => ({
+//   email: state.storeemail,
+// });
+// const mapDispatchToProps = (dispatch) => ({
+//   getRecentExpensesFive: () => dispatch(getRecentExpensesFive()),
+// });
+//export default connect(mapStateToProps)(Orders);
+export default Orders;

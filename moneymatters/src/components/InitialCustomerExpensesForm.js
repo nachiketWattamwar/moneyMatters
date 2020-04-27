@@ -100,29 +100,45 @@ class InitialCustomerExpensesForm extends Component {
   onSignup = async (e) => {
     e.preventDefault();
     const data = this.props.data;
+    // {
+    //   "email" : "nikhil@yahoo.co.in",
+    //   "category" : "food",
+    //   "amount" : 100,
+    //   "timestamp" : "04-12-2018",
+    //   "paymentsource" : "Cash",
+    //   "description" : "groceries"
+    // }
 
     const { rent, grocery, wifi, travel, mobile } = this.state;
-    const initialExpenses = {
-      rent: rent,
-      grocery: grocery,
-      wifi: wifi,
-      mobile: mobile,
-      travel: travel,
-      email: data.email,
-      timestamp: new Date(),
-    };
-
+    let initialExpenses = null;
+    console.log("state infor", this.state);
+    const initialData = Object.keys(this.state).map((i) => {
+      if (i != "popup") {
+        return (initialExpenses = {
+          email: data.email,
+          category: i,
+          amount: this.state[i],
+          timestamp: new Date(),
+          expenseType: "Cash",
+          description: i,
+        });
+      }
+    });
+    console.log("=======>", initialData);
     //console.log("inside intial expenses data==========", initialExpenses);
 
-    if (data.password !== data.confirmPassword)
-      console.log("passwords do not match");
-    else {
-      const firstResponse = await axios.post(
-        "http://localhost:3001/expenses/initial",
-        initialExpenses
-      );
+    for (let i = 0; i < 5; i++) {
+      if (data.password !== data.confirmPassword)
+        console.log("passwords do not match");
+      else {
+        console.log("inisde api calls ", initialData[i]);
+        const firstResponse = await axios.post(
+          "http://localhost:3001/expenses/initial",
+          initialData[i]
+        );
 
-      //console.log("inside 2nd api call========",firstResponse);
+        console.log("inside 2nd api call========", firstResponse);
+      }
     }
   };
 

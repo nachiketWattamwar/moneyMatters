@@ -91,10 +91,17 @@ class Login extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log("this props redux info is ", this.props.email);
+    console.log("this props redux info is ", this.state);
 
     if (this.state.authorise) {
-      return <Redirect to='/dashboard' />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/dashboard",
+            state: { email: this.state.email },
+          }}
+        />
+      );
     } else {
       return (
         <div>

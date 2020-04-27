@@ -13,6 +13,7 @@ const uservalidity = require("../middleware/uservalidity");
 router.post("/expenses/initial", uservalidity, async (req, res) => {
   try {
     const exp = new Expense(req.body);
+    console.log("=======expenses ", req.body);
     await exp.save();
     var objArr = [];
     const d = new Date(req.body.timestamp);
@@ -51,7 +52,7 @@ router.post("/expenses", uservalidity, async (req, res) => {
 /*
  * All expenses of a particular user.uservalidity
  */
-router.get("/expenses", async (req, res) => {
+router.post("/allexpenses", async (req, res) => {
   const userEmail = req.body.email;
   console.log("Getting expenses for user - " + userEmail);
   try {
