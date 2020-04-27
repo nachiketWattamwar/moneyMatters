@@ -1,22 +1,13 @@
 import React, { Component } from "react";
-import DataTable from "react-data-table-component";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
-import TextField from "@material-ui/core/TextField";
-import DateFnsUtils from "@date-io/date-fns"; // import
-import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import MaterialTable from "material-table";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import "../scss/_mystyles.scss";
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
@@ -26,6 +17,9 @@ import ChevronRight from "@material-ui/icons/ChevronRight";
 import Clear from "@material-ui/icons/Clear";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import Edit from "@material-ui/icons/Edit";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+//import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+//import ShowChartIcon from "@material-ui/icons/ShowChart";
 import FilterList from "@material-ui/icons/FilterList";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
@@ -33,6 +27,7 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import { createBrowserHistory } from "history";
 
 const tableIcons = {
 	Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -55,31 +50,16 @@ const tableIcons = {
 	Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
 	SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
 	ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
-/*
-const columns = [
-	//{ title: "id", field: "id" },
-	{ title: "Name", field: "Name" },
-	{ title: "Amount", field: "Amount" },
-	{ title: "Date", field: "Date" }
-];
-
-let data = [
-	{ id: "1", Name: "Costco Co.", Amount: "$19", Date: "16 Mar, 2019" },
-	{ id: "2", Name: "PG&E", Amount: "$22", Date: "16 Mar, 2019" },
-	{ id: "3", Name: "Gas", Amount: "$22", Date: "16 Mar, 2019" },
-	{ id: "4", Name: "Medical Bills", Amount: "$220", Date: "16 Mar, 2019" },
-	{ id: "5", Name: "Pet", Amount: "$220", Date: "15 Mar, 2019" }
-];
-*/
 
 const columns = [
 	//{ title: "id", field: "id" },
 	{ title: "Name", field: "Name" },
 	{ title: "Amount", field: "Amount" },
+	{ title: "Savings %", field: "Share" },
 	{ title: "Start Date", field: "StartDate" },
-	{ title: "End Date", field: "EndDate" }
+	{ title: "End Date", field: "EndDate" },
 ];
 
 let data = [
@@ -87,26 +67,29 @@ let data = [
 		id: "1",
 		Name: "Retirement Fund",
 		Amount: "$100,000",
-		StartDate: "16 Mar, 2019",
-		EndDate: "16 Mar, 2055"
+		Share: "20",
+		StartDate: "1 Mar, 2020",
+		EndDate: "1 Mar, 2055",
 	},
 	{
 		id: "2",
 		Name: "John's College Fund",
 		Amount: "50,000",
-		StartDate: "16 Aug, 2015",
-		EndDate: "16 May, 2030"
+		Share: "40",
+		StartDate: "1 Mar, 2020",
+		EndDate: "1 May, 2030",
 	},
 	{
 		id: "3",
 		Name: "Savings for house",
 		Amount: "200,000",
-		StartDate: "10 Feb, 2019",
-		EndDate: "10 Mar, 2021"
-	}
+		Share: "40",
+		StartDate: "1 Mar, 2020",
+		EndDate: "10 Mar, 2021",
+	},
 ];
 
-export default class Goals extends Component {
+export default class FinancialGoals extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -117,7 +100,7 @@ export default class Goals extends Component {
 			description: "",
 			price: 0,
 			data: data, //pull from backend
-			columns: columns
+			columns: columns,
 		};
 	}
 
@@ -139,51 +122,75 @@ export default class Goals extends Component {
 							<div className='totalExpensesTable'>
 								<MaterialTable
 									icons={tableIcons}
+									actions={[
+										{
+											icon: () => <TrendingUpIcon />,
+											tooltip: "Track Progress",
+
+											onClick: (event, rowData) =>
+												this.props.history.push({
+													pathname: "/trackGoals",
+													search: "?goalId=" + rowData.id,
+												}),
+										},
+									]}
 									title='Goals set by you'
 									columns={this.state.columns}
 									data={this.state.data}
 									editable={{
-										onRowAdd: newData =>
-											new Promise(resolve => {
+										onRowTrack: (newData) =>
+											new Promise((resolve) => {
 												setTimeout(() => {
 													resolve();
 													newData.id = this.state.data.length + 1;
 													let temp = this.state.data.concat(newData);
 													this.setState({
-														data: temp
+														data: temp,
+													});
+													//call to the backend
+												}, 600);
+											}),
+										onRowAdd: (newData) =>
+											new Promise((resolve) => {
+												setTimeout(() => {
+													resolve();
+													newData.id = this.state.data.length + 1;
+													let temp = this.state.data.concat(newData);
+													this.setState({
+														data: temp,
 													});
 													//call to the backend
 												}, 600);
 											}),
 										onRowUpdate: (newData, oldData) =>
-											new Promise(resolve => {
+											new Promise((resolve) => {
 												setTimeout(() => {
 													resolve();
 													let id = oldData.id;
 													let dataCopy = this.state.data;
-													let temp = dataCopy.map(obj =>
+													let temp = dataCopy.map((obj) =>
 														obj.id == id ? newData : obj
 													);
 													this.setState({
-														data: temp
+														data: temp,
 													});
 													//call to the backend
 												}, 600);
 											}),
-										onRowDelete: oldData =>
-											new Promise(resolve => {
+										onRowDelete: (oldData) =>
+											new Promise((resolve) => {
 												setTimeout(() => {
 													resolve();
 													console.log("inside delete", oldData);
 													let temp = this.state.data;
-													temp = temp.filter(d => d.id !== oldData.id);
+													temp = temp.filter((d) => d.id !== oldData.id);
 													console.log("newData ", temp);
 													this.setState({
-														data: temp
+														data: temp,
 													});
 													//call to the backend
 												}, 600);
-											})
+											}),
 									}}
 								/>
 							</div>
