@@ -120,7 +120,7 @@ coeff_df = pd.DataFrame(lm.coef_,X.columns,columns=['Coefficient'])
 predictions = lm.predict(X_test)
 
 dfnew = pd.read_csv(sys.argv[1])
-print(sys.argv[1])
+#print(sys.argv[1])
 TotalExp = lm.predict(dfnew)*100
 print(TotalExp)
 

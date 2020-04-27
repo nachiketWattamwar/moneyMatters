@@ -24,7 +24,8 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { connect } from "react-redux";
-
+import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router-dom";
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -51,46 +52,46 @@ const tableIcons = {
 
 const columns = [
   //{ title: "id", field: "id" },
-  { title: "Description", field: "Description", type: "string" },
-  { title: "Category (Bill,Rent,Food)", field: "Category", type: "string" },
-  { title: "ExpenseType", field: "ExpenseType", type: "string" },
-  { title: "Amount (in $)", field: "Amount", type: "numeric" },
-  { title: "Date", field: "Date", type: "date" },
+  { title: "Description", field: "description", type: "string" },
+  { title: "Category (Bill,Rent,Food)", field: "category", type: "string" },
+  { title: "ExpenseType", field: "expenseType", type: "string" },
+  { title: "Amount (in $)", field: "amount", type: "numeric" },
+  { title: "Date", field: "timestamp", type: "date" },
 ];
 
 let data = [
-  {
-    id: "1",
-    Description: "Costco Co.",
-    Amount: 19,
-    Category: "Food",
-    ExpenseType: "temp",
-    Date: "16 Mar, 2019",
-  },
-  {
-    id: "2",
-    Description: "PG&E",
-    Amount: 22,
-    Category: "Bill",
-    ExpenseType: "temp",
-    Date: "16 Mar, 2019",
-  },
-  {
-    id: "3",
-    Description: "Gas",
-    Amount: 21,
-    Category: "Bill",
-    ExpenseType: "temp",
-    Date: "16 Mar, 2019",
-  },
-  {
-    id: "4",
-    Description: "Medical Bills",
-    Amount: 223,
-    Category: "Bill",
-    ExpenseType: "temp",
-    Date: "16 Mar, 2019",
-  },
+  // {
+  //   id: "1",
+  //   Description: "Costco Co.",
+  //   Amount: 19,
+  //   Category: "Food",
+  //   ExpenseType: "temp",
+  //   Date: "16 Mar, 2019",
+  // },
+  // {
+  //   id: "2",
+  //   Description: "PG&E",
+  //   Amount: 22,
+  //   Category: "Bill",
+  //   ExpenseType: "temp",
+  //   Date: "16 Mar, 2019",
+  // },
+  // {
+  //   id: "3",
+  //   Description: "Gas",
+  //   Amount: 21,
+  //   Category: "Bill",
+  //   ExpenseType: "temp",
+  //   Date: "16 Mar, 2019",
+  // },
+  // {
+  //   id: "4",
+  //   Description: "Medical Bills",
+  //   Amount: 223,
+  //   Category: "Bill",
+  //   ExpenseType: "temp",
+  //   Date: "16 Mar, 2019",
+  // },
 ];
 
 class Test extends Component {
@@ -113,12 +114,14 @@ class Test extends Component {
     const expenseData = {
       email: this.props.email.email, //done
     };
-    axios.get(`http://localhost:3001/expenses`, expenseData).then((res) => {
+    console.log("=====inside test email ", expenseData);
+    axios.post(`http://localhost:3001/allexpenses`, expenseData).then((res) => {
       console.log("after axios call ", res.data);
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
       this.setState({
         data: res.data,
+        email: this.props.email.email,
       });
     });
   }
@@ -131,6 +134,15 @@ class Test extends Component {
         <div>
           <AppBar position='static'>
             <Toolbar>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={() => {
+                  //
+                }}
+              >
+                Back
+              </Button>
               <Typography variant='h6' className='title'>
                 Expenses
               </Typography>
@@ -153,13 +165,14 @@ class Test extends Component {
                           resolve();
                           //call to the backend
                           const expenseData = {
-                            email: this.props.email.email, //done
-                            description: newData.Description, // done
-                            category: newData.Category, //done
-                            amount: newData.Amount, //done
-                            timestamp: newData.Date, //done
-                            expenseType: newData.ExpenseType, //done
+                            email: this.state.email, //done
+                            description: newData.description, // done
+                            category: newData.category, //done
+                            amount: newData.amount, //done
+                            timestamp: newData.timestamp, //done
+                            expenseType: newData.expenseType, //done
                           };
+                          console.log("sending new data ", expenseData);
                           axios
                             .post(`http://localhost:3001/expenses`, expenseData)
                             .then((res) => {
@@ -176,29 +189,36 @@ class Test extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-                          let id = oldData.id;
-                          let dataCopy = this.state.data;
-                          let temp = dataCopy.map((obj) =>
-                            obj.id == id ? newData : obj
-                          );
-                          this.setState({
-                            data: temp,
-                          });
-
                           const expenseData = {
-                            description: newData.Description, // done
-                            category: newData.Category, //done
-                            amount: newData.Amount, //done
-
-                            expenseType: newData.ExpenseType, //done
+                            description: newData.description, // done
+                            category: newData.category, //done
+                            amount: newData.amount, //done
+                            expenseType: newData.expenseType, //done
                           };
                           axios
                             .patch(
-                              `http://localhost:3001/expenses/${oldData.id}`,
+                              `http://localhost:3001/expenses/${oldData._id}`,
                               expenseData
                             )
                             .then((res) => {
                               console.log("after axios call  update", res.data);
+                              const expenseData = {
+                                email: this.props.email.email, //done
+                              };
+                              axios
+                                .post(
+                                  `http://localhost:3001/allexpenses`,
+                                  expenseData
+                                )
+                                .then((res) => {
+                                  console.log("after axios call ", res.data);
+                                  //newData.id = res.data._id;
+                                  //let temp = this.state.data.concat(newData);
+                                  this.setState({
+                                    data: res.data,
+                                    email: this.props.email.email,
+                                  });
+                                });
                             });
                         }, 600);
                       }),
@@ -206,20 +226,31 @@ class Test extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-
-                          let temp = this.state.data;
-                          temp = temp.filter((d) => d.id !== oldData.id);
-
-                          this.setState({
-                            data: temp,
-                          });
                           //call to the backend
+                          console.log("========old data is ", oldData);
                           axios
                             .delete(
-                              `http://localhost:3001/expenses/${oldData.id}`
+                              `http://localhost:3001/expenses/${oldData._id}`
                             )
                             .then((res) => {
                               //console.log("after axios call ", res.data);
+                              const expenseData = {
+                                email: this.props.email.email, //done
+                              };
+                              axios
+                                .post(
+                                  `http://localhost:3001/allexpenses`,
+                                  expenseData
+                                )
+                                .then((res) => {
+                                  console.log("after axios call ", res.data);
+                                  //newData.id = res.data._id;
+                                  //let temp = this.state.data.concat(newData);
+                                  this.setState({
+                                    data: res.data,
+                                    email: this.props.email.email,
+                                  });
+                                });
                             });
                         }, 600);
                       }),

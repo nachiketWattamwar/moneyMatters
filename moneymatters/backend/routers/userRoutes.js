@@ -8,9 +8,7 @@ const User = require("../models/user");
 
 //signing up user
 router.post("/users", (req, res) => {
-  //console.log("=========inside initial expenses ", req.body);
   let predictedValue = null;
-  console.log("Request Body=============== ", req.body);
   const userData = req.body;
   const name = req.body.email;
   const fileName = `${name}.csv`;
@@ -80,7 +78,6 @@ router.post("/users", (req, res) => {
 // findByCredentials lives as a static method on the model "User"
 // generateAuthToken lives as an instance method on the object "user"
 router.post("/users/login", async (req, res) => {
-  //console.log("in nikhil's method: " + req.body.email);
   try {
     const userFromDatabase = await User.findByCredentials(
       req.body.email,

@@ -114,7 +114,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  //console.log("inside dashborad compo ", props.location.state.email);
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [openSnackbar, setOpenSnackbar] = React.useState(true);
@@ -213,7 +214,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <MainContent></MainContent>
+        <MainContent email={props.location.state.email}></MainContent>
         <Copyright />
       </main>
     </div>
