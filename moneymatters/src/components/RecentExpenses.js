@@ -67,7 +67,7 @@ class Orders extends Component {
     const expenseData = {
       email: this.props.email.email, //done
     };
-    console.log("========inside cdm ", expenseData);
+    //console.log("========inside cdm ", expenseData);
     axios.post(`http://localhost:3001/allexpenses`, expenseData).then((res) => {
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
@@ -77,7 +77,7 @@ class Orders extends Component {
         data: sortedData,
       });
 
-      console.log("=====", sortedData);
+      //console.log("=====", sortedData);
     });
   }
   render() {

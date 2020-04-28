@@ -121,7 +121,7 @@ export default class FinancialGoals extends Component {
 
                       onClick: (event, rowData) =>
                         this.props.history.push({
-                          pathname: "/trackingGoals",
+                          pathname: "/trackGoals",
                           search: "?goalId=" + rowData.id,
                         }),
                     },

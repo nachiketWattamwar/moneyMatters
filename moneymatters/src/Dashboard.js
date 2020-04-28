@@ -101,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     height: "100vh",
+    width: "100%",
     overflow: "auto",
   },
   container: {
@@ -231,7 +232,7 @@ export default function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <SideBar></SideBar>
+        <SideBar email={props.location.state.email}></SideBar>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

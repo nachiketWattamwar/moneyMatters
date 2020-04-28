@@ -127,7 +127,7 @@ class FinancingGoals extends Component {
           <AppBar position='static'>
             <Toolbar>
               <Typography variant='h6' className='title'>
-                Financing Goals new
+                Financing Goals
               </Typography>
             </Toolbar>
           </AppBar>

@@ -53,6 +53,7 @@ class Login extends Component {
       email: null,
       password: null,
       authorise: false,
+      profileInfo: null,
       token: null,
     };
   }
@@ -82,6 +83,7 @@ class Login extends Component {
       if (res.data) {
         this.setState({
           email: res.data.userFromDatabase.email,
+          profileInfo: res.data.userFromDatabase,
           authorise: true,
         });
       }
@@ -98,7 +100,10 @@ class Login extends Component {
         <Redirect
           to={{
             pathname: "/dashboard",
-            state: { email: this.state.email },
+            state: {
+              email: this.state.email,
+              profileInfo: this.state.profileInfo,
+            },
           }}
         />
       );

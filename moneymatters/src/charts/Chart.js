@@ -6,7 +6,7 @@ import Title from "../components/Title";
 
 export default function Chart() {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["January", "February", "March", "April"],
     datasets: [
       {
         label: "Monthly expenses",
@@ -27,13 +27,13 @@ export default function Chart() {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [650, 590, 800, 810, 560, 550, 555]
-      }
-    ]
+        data: [240, 500, 800, 910],
+      },
+    ],
   };
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title></Title>
       <Line width='300px' height='80px' data={data} />
     </React.Fragment>
   );

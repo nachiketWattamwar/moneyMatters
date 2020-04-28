@@ -4,14 +4,15 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import Chart from "../charts/Chart";
+import ProfileInfo from "./ProfileInfo";
 import Deposits from "./Deposits";
 import RecentExpenses from "./RecentExpenses";
+import AllExpenses from "./AllExpenses";
 
-const drawerWidth = 240;
+const drawerWidth = 100;
 
 export default function MainContent(props) {
-  console.log("=======inside MC", props);
+  //console.log("=======inside MC", props);
   const useStylesOne = makeStyles((theme) => ({
     root: {
       display: "flex",
@@ -96,17 +97,22 @@ export default function MainContent(props) {
   return (
     <div>
       <Container>
-        <Grid container spacing={3}>
-          {/* Chart */}
-          <Grid item xs={12} md={8} lg={9}>
+        <Grid container spacing={4} justify='space-evenly'>
+          {/* Profile */}
+          <Grid item xs={12} md={4} lg={3}>
             <Paper className={fixedHeightPaper}>
-              <Chart />
+              <ProfileInfo email={props} />
             </Paper>
           </Grid>
-          {/* Recent Deposits */}
+          {/* Next prediction value */}
           <Grid item xs={12} md={4} lg={3}>
             <Paper className={fixedHeightPaper}>
               <Deposits email={props} />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4} lg={3}>
+            <Paper className={fixedHeightPaper}>
+              <AllExpenses email={props} />
             </Paper>
           </Grid>
           {/* Recent Expenses */}

@@ -6,6 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ReportsPie from "../charts/ReportsPie";
+import Chart from "../charts/Chart";
 import ReportsHorizontalBar from "../charts/ReportsHorizontalBar";
 import "../scss/_mystyles.scss";
 
@@ -14,11 +15,11 @@ const spanStyle = {
 };
 
 const dataExpense = {
-  labels: ["Food", "Rent and Bills", "Misc"],
+  labels: ["Food", "Rent", "Bills", "Travel", "Groceries"],
   datasets: [
     {
-      data: [30, 500, 100],
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+      data: [250, 2000, 500, 500, 250],
+      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "grey", "green"],
       hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
     },
   ],
@@ -95,10 +96,8 @@ export default class DetailFinances extends Component {
             >
               <Grid item xs={6}>
                 <Paper className='reports' elevation='10'>
-                  <Typography align='center'>
-                    Income (All figures in $)
-                  </Typography>
-                  <ReportsPie data={dataIncome} />
+                  <Typography align='center'>Expense History</Typography>
+                  <Chart />
                 </Paper>
               </Grid>
             </Grid>

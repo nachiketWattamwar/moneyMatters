@@ -91,6 +91,15 @@ router.post("/users/login", async (req, res) => {
   }
 });
 
+router.post("/getProfileInfo", async (req, res) => {
+  try {
+    const userObj = await User.findOne({ email: req.body.email });
+    res.send({ userObj });
+  } catch (e) {
+    res.status(400).send("User not found");
+  }
+});
+
 //To add middleware to an individual route pass "auth" as an argument
 router.get("/users", auth, async (req, res) => {
   try {

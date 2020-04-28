@@ -114,7 +114,7 @@ class Test extends Component {
     const expenseData = {
       email: this.props.email.email, //done
     };
-    console.log("=====inside test email ", expenseData);
+    //console.log("=====inside test email ", expenseData);
     axios.post(`http://localhost:3001/allexpenses`, expenseData).then((res) => {
       console.log("after axios call ", res.data);
       //newData.id = res.data._id;
@@ -134,15 +134,6 @@ class Test extends Component {
         <div>
           <AppBar position='static'>
             <Toolbar>
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={() => {
-                  //
-                }}
-              >
-                Back
-              </Button>
               <Typography variant='h6' className='title'>
                 Expenses
               </Typography>
