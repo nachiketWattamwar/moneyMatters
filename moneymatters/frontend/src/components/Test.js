@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import { URL } from "../config/config";
+
 import MaterialTable from "material-table";
 //import "../scss/_mystyles.scss";
 import { forwardRef } from "react";
@@ -124,7 +126,7 @@ class Test extends Component {
       email: this.props.email.email, //done
     };
     //console.log("=====inside test email ", expenseData);
-    axios.post(`http://localhost:4000/allexpenses`, expenseData).then((res) => {
+    axios.post(`http://${URL}/allexpenses`, expenseData).then((res) => {
       console.log("after axios call ", res.data);
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
@@ -174,7 +176,7 @@ class Test extends Component {
                           };
                           console.log("sending new data ", expenseData);
                           axios
-                            .post(`http://localhost:4000/expenses`, expenseData)
+                            .post(`http://${URL}/expenses`, expenseData)
                             .then((res) => {
                               //console.log("after axios call ", res.data);
                               newData.id = res.data._id;
@@ -197,7 +199,7 @@ class Test extends Component {
                           };
                           axios
                             .patch(
-                              `http://localhost:4000/expenses/${oldData._id}`,
+                              `http://${URL}/expenses/${oldData.id}`,
                               expenseData
                             )
                             .then((res) => {
@@ -206,10 +208,7 @@ class Test extends Component {
                                 email: this.props.email.email, //done
                               };
                               axios
-                                .post(
-                                  `http://localhost:4000/allexpenses`,
-                                  expenseData
-                                )
+                                .post(`http://${URL}/allexpenses`, expenseData)
                                 .then((res) => {
                                   console.log("after axios call ", res.data);
                                   //newData.id = res.data._id;
@@ -229,19 +228,14 @@ class Test extends Component {
                           //call to the backend
                           console.log("========old data is ", oldData);
                           axios
-                            .delete(
-                              `http://localhost:4000/expenses/${oldData._id}`
-                            )
+                            .delete(`http://${URL}/expenses/${oldData.id}`)
                             .then((res) => {
                               //console.log("after axios call ", res.data);
                               const expenseData = {
                                 email: this.props.email.email, //done
                               };
                               axios
-                                .post(
-                                  `http://localhost:4000/allexpenses`,
-                                  expenseData
-                                )
+                                .post(`http://${URL}/allexpenses`, expenseData)
                                 .then((res) => {
                                   console.log("after axios call ", res.data);
                                   //newData.id = res.data._id;

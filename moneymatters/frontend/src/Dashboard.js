@@ -23,6 +23,7 @@ import Icon from "@material-ui/core/Icon";
 import { useEffect } from "react";
 
 import axios from "axios";
+import { URL } from "./config/config";
 
 function Copyright() {
   return (
@@ -123,15 +124,7 @@ export default function Dashboard(props) {
   //console.log("inside dashborad compo ", props.location.state.email);
 
   useEffect(() => {
-    // const pyprocess = spawn("python", [
-    //   "C:/Users/Nachi/Documents/GitHub/masters295/MoneyMatters/moneymatters/PFMP.py",
-    //   `${props.location.state.email}.csv`,
-    // ]);
-    // pyprocess.stdout.on("data", async (data) => {
-    //   const predictedValue = data.toString();
-    //   console.log("predicted value is in UI ", predictedValue);
-    // });
-    axios.get(`http://localhost:4000/prediction`).then((res) => {
+    axios.get(`http://${URL}/prediction`).then((res) => {
       console.log("after axios call ", res.data);
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);

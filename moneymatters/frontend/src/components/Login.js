@@ -16,6 +16,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { storeemail } from "../actions/storeemail";
 import { connect } from "react-redux";
+import { URL } from "../config/config";
 function Copyright() {
   return (
     <Typography variant='body2' color='textSecondary' align='center'>
@@ -76,8 +77,8 @@ class Login extends Component {
 
   onLogin = () => {
     const data = this.state;
-    console.log("in onLogin method: ", data);
-    axios.post(`http://localhost:4000/users/login`, data).then((res) => {
+    console.log("in onLogin method: ", data, `http://${URL}/users/login`);
+    axios.post(`http://${URL}/users/login`, data).then((res) => {
       console.log("before starting action ");
 
       if (res.data) {

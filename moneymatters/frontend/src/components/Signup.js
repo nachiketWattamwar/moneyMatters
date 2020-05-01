@@ -17,7 +17,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import axios from "axios";
 import InitialCustomerExpensesForm from "./InitialCustomerExpensesForm";
-
+import { URL } from "../config/config";
 // Higher order component is withStyles
 const useStyles = (theme) => ({
   paper: {
@@ -59,7 +59,7 @@ class SignupWithoutStyles extends Component {
   }
 
   saveCustomerDetails = async () => {
-    const res = await axios.post(`http://localhost:4000/users`, this.state);
+    const res = await axios.post(`http://${URL}/users`, this.state);
     this.setState({ isExpenseForm: true, isCustomerDetailsForm: false });
     this.props.storepredictedvalue(res.data.predictedValue);
   };

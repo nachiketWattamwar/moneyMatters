@@ -18,6 +18,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
+import { URL } from "../config/config";
 const useStyles = (theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -129,7 +130,7 @@ class InitialCustomerExpensesForm extends Component {
     //console.log("inside intial expenses data==========", initialExpenses);
 
     const firstResponse = await axios.post(
-      "http://localhost:4000/expenses/initial",
+      `http://${URL}/expenses/initial`,
       initialData
     );
     // for (let i = 0; i < 5; i++) {

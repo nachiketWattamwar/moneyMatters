@@ -5,6 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
+import { URL } from "../config/config";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -122,7 +123,7 @@ export default class Test extends Component {
     });
 
     axios
-      .post(`http://localhost:4000/deleteExpense`, {
+      .post(`http://${URL}/deleteExpense`, {
         data: this.state.selectedRows,
       })
       .then((res) => {
@@ -156,12 +157,10 @@ export default class Test extends Component {
     //   data: data
     // });
     console.log("inside addexpnse", newExpense);
-    axios
-      .post(`http://localhost:4000/newExpense`, { newExpense })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
+    axios.post(`http://${URL}/newExpense`, { newExpense }).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
   }
 
   getPrice(e) {

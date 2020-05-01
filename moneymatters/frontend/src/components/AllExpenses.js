@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { URL } from "../config/config";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
 
@@ -16,7 +17,7 @@ export default class AllExpenses extends Component {
       totalExpenses: null,
     };
     console.log("========inside all expenses", expenseData);
-    axios.post(`http://localhost:4000/allexpenses`, expenseData).then((res) => {
+    axios.post(`http://${URL}/allexpenses`, expenseData).then((res) => {
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
       const sortedData = res.data;

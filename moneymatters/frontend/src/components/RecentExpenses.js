@@ -20,6 +20,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import MaterialTable from "material-table";
 import { connect } from "react-redux";
+import { URL } from "../config/config";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -68,7 +69,7 @@ class Orders extends Component {
       email: this.props.email.email, //done
     };
     //console.log("========inside cdm ", expenseData);
-    axios.post(`http://localhost:4000/allexpenses`, expenseData).then((res) => {
+    axios.post(`http://${URL}/allexpenses`, expenseData).then((res) => {
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
       const sortedData = res.data.reverse();
@@ -104,7 +105,7 @@ class Orders extends Component {
                     expenseType: newData.ExpenseType, //done
                   };
                   axios
-                    .post(`http://localhost:4000/expenses`, expenseData)
+                    .post(`http://${URL}/expenses`, expenseData)
                     .then((res) => {
                       //console.log("after axios call ", res.data);
                       newData.id = res.data._id;
@@ -136,10 +137,7 @@ class Orders extends Component {
                     expenseType: newData.ExpenseType, //done
                   };
                   axios
-                    .patch(
-                      `http://localhost:4000/expenses/${oldData.id}`,
-                      expenseData
-                    )
+                    .patch(`http://${URL}/expenses/${oldData.id}`, expenseData)
                     .then((res) => {
                       console.log("after axios call  update", res.data);
                     });
@@ -158,7 +156,7 @@ class Orders extends Component {
                   });
                   //call to the backend
                   axios
-                    .delete(`http://localhost:4000/expenses/${oldData.id}`)
+                    .delete(`http://${URL}/expenses/${oldData.id}`)
                     .then((res) => {
                       //console.log("after axios call ", res.data);
                     });

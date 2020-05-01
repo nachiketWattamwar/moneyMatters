@@ -9,6 +9,7 @@ import MaterialTable from "material-table";
 import { forwardRef } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import { URL } from "../config/config";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Check from "@material-ui/icons/Check";
@@ -118,7 +119,7 @@ class FinancingGoals extends Component {
       email: this.props.email.email, //done
     };
     console.log("=====inside financing goals email ", expenseData);
-    axios.post(`http://localhost:4000/allgoals`, expenseData).then((res) => {
+    axios.post(`http://${URL}/allgoals`, expenseData).then((res) => {
       console.log("after axios call ", res.data);
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
@@ -197,7 +198,7 @@ class FinancingGoals extends Component {
                           };
                           console.log("sending new data ", expenseData);
                           axios
-                            .post(`http://localhost:4000/goals`, expenseData)
+                            .post(`http://${URL}/goals`, expenseData)
                             .then((res) => {
                               console.log("after axios call ", res.data);
                               newData.id = res.data._id;

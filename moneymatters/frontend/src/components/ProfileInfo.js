@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
 import axios from "axios";
+import { URL } from "../config/config";
+
 const useStyles = makeStyles({
   depositContext: {
     flex: 1,
@@ -27,7 +29,7 @@ const ProfileInfo = (props) => {
       email: props.email.email, //done
     };
     //console.log("========deposits and expenseData", expenseData);
-    axios.post(`http://localhost:4000/getProfileInfo`, user).then((res) => {
+    axios.post(`http://${URL}/getProfileInfo`, user).then((res) => {
       console.log("after axios call profile info ", res.data.userObj);
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
