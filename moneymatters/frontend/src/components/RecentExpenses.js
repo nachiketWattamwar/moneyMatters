@@ -68,7 +68,7 @@ class Orders extends Component {
     const expenseData = {
       email: this.props.email.email, //done
     };
-    //console.log("========inside cdm ", expenseData);
+    console.log("========inside cdm ", expenseData);
     axios.post(`http://${URL}/allexpenses`, expenseData).then((res) => {
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
@@ -98,17 +98,18 @@ class Orders extends Component {
                   //call to the backend
                   const expenseData = {
                     email: this.props.email.email, //done
-                    description: newData.Description, // done
-                    category: newData.Category, //done
-                    amount: newData.Amount, //done
-                    timestamp: newData.Date, //done
-                    expenseType: newData.ExpenseType, //done
+                    description: newData.description, // done
+                    category: newData.category, //done
+                    amount: newData.amount, //done
+                    timestamp: newData.timestamp, //done
+                    expenseType: newData.expenseType, //done
                   };
+                  console.log("new data in recent is ", newData);
                   axios
                     .post(`http://${URL}/expenses`, expenseData)
                     .then((res) => {
-                      //console.log("after axios call ", res.data);
-                      newData.id = res.data._id;
+                      console.log("after axios call in addition ", res.data);
+                      newData._id = res.data._id;
                       let temp = this.state.data.concat(newData);
                       this.setState({
                         data: temp,
@@ -120,26 +121,43 @@ class Orders extends Component {
               new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
-                  let id = oldData.id;
-                  let dataCopy = this.state.data;
-                  let temp = dataCopy.map((obj) =>
-                    obj.id == id ? newData : obj
-                  );
-                  this.setState({
-                    data: temp,
-                  });
+                  // let id = oldData._id;
+                  // let dataCopy = this.state.data;
+                  // let temp = dataCopy.map((obj) =>
+                  //   obj.id == id ? newData : obj
+                  // );
+                  // this.setState({
+                  //   data: temp,
+                  // });
 
                   const expenseData = {
-                    description: newData.Description, // done
-                    category: newData.Category, //done
-                    amount: newData.Amount, //done
-
-                    expenseType: newData.ExpenseType, //done
+                    description: newData.description, // done
+                    category: newData.category, //done
+                    amount: newData.amount, //done
+                    expenseType: newData.expenseType, //done
                   };
                   axios
-                    .patch(`http://${URL}/expenses/${oldData.id}`, expenseData)
+                    .patch(`http://${URL}/expenses/${oldData._id}`, expenseData)
                     .then((res) => {
                       console.log("after axios call  update", res.data);
+
+                      const expenseData = {
+                        email: this.props.email.email, //done
+                      };
+                      axios
+                        .post(`http://${URL}/allexpenses`, expenseData)
+                        .then((res) => {
+                          console.log(
+                            "after axios call allexpenses in update ",
+                            res.data
+                          );
+                          //newData.id = res.data._id;
+                          //let temp = this.state.data.concat(newData);
+                          this.setState({
+                            data: res.data,
+                            email: this.props.email.email,
+                          });
+                        });
                     });
                 }, 600);
               }),
@@ -148,17 +166,31 @@ class Orders extends Component {
                 setTimeout(() => {
                   resolve();
 
-                  let temp = this.state.data;
-                  temp = temp.filter((d) => d.id !== oldData.id);
+                  // let temp = this.state.data;
+                  // temp = temp.filter((d) => d.id !== oldData.id);
 
-                  this.setState({
-                    data: temp,
-                  });
+                  // this.setState({
+                  //   data: temp,
+                  // });
                   //call to the backend
                   axios
-                    .delete(`http://${URL}/expenses/${oldData.id}`)
+                    .delete(`http://${URL}/expenses/${oldData._id}`)
                     .then((res) => {
                       //console.log("after axios call ", res.data);
+                      const expenseData = {
+                        email: this.props.email.email, //done
+                      };
+                      axios
+                        .post(`http://${URL}/allexpenses`, expenseData)
+                        .then((res) => {
+                          //console.log("after axios call ", res.data);
+                          //newData.id = res.data._id;
+                          //let temp = this.state.data.concat(newData);
+                          this.setState({
+                            data: res.data,
+                            email: this.props.email.email,
+                          });
+                        });
                     });
                 }, 600);
               }),

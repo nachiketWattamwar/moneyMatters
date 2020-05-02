@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
@@ -7,6 +7,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ReportsPie from "../charts/ReportsPie";
 import Chart from "../charts/Chart";
+import { Pie } from "react-chartjs-2";
+import { URL } from "../config/config";
 import ReportsHorizontalBar from "../charts/ReportsHorizontalBar";
 //import "../scss/_mystyles.scss";
 
@@ -45,6 +47,35 @@ const title = {
 };
 
 export default class DetailFinances extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      data: null,
+    };
+  }
+
+  // componentDidMount() {
+  //   axios.get("http://localhost:4000/recentFiveExpenses").then((res) => {
+  //     console.log(
+  //       "from backend data, axios recent 5 expenses",
+  //       res.data.length
+  //     );
+  //     let arr = new Array();
+  //     for (let i = 0; i < res.data.length; i++) {
+  //       arr.push(res.data[i]);
+  //     }
+  //     dataExpense.datasets[0] = arr;
+
+  //     this.setState({
+  //       loading: false,
+  //       data: dataExpense,
+  //     });
+
+  //     console.log("all data is after axios call reports piw ", this.state.data);
+  //   });
+  // }
+
   render() {
     const imagePath = `url(images/pencilpen.jpg)`;
     return (
@@ -89,7 +120,7 @@ export default class DetailFinances extends Component {
                   <Typography align='center'>
                     Expenses (All figures in $)
                   </Typography>
-                  <ReportsPie data={dataExpense} legend={"asfd"} />
+                  <Pie data={dataExpense}></Pie>
                 </Paper>
               </Grid>
             </Grid>

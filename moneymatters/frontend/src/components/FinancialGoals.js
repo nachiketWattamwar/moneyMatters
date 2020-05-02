@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import MaterialTable from "material-table";
 //import "../scss/_mystyles.scss";
 import { forwardRef } from "react";
-import { Link } from "react-router-dom";
 
+import { URL } from "../config/config";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import Check from "@material-ui/icons/Check";
@@ -28,6 +28,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import { createBrowserHistory } from "history";
+import axios from "axios";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -67,8 +68,8 @@ const columns = [
   { title: "Name", field: "Name" },
   { title: "Amount", field: "Amount" },
   { title: "Savings %", field: "Share" },
-  { title: "Start Date", field: "StartDate" },
-  { title: "End Date", field: "EndDate" },
+  { title: "Start Date", field: "EndDate" },
+  { title: "End Date", field: "StartDate" },
 ];
 
 let data = [
@@ -94,15 +95,17 @@ export default class FinancialGoals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalExpense: 1212,
-      date: "Fri Dec 06 2019 17:17:00 GMT-0800",
-      expenseType: "Default",
-      categoryType: "",
-      description: "",
-      price: 0,
-      data: data, //pull from backend
+      data: data,
       columns: columns,
     };
+  }
+  componentDidMount() {
+    axios.post(`http://${URL}/allgoals`).then((res) => {
+      this.setState({
+        data: null,
+      });
+      console.log("inside goals CDM", this.state);
+    });
   }
 
   render() {

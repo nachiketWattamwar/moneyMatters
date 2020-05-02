@@ -5,7 +5,7 @@ export default class ReportsPie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data
+      data: this.props.data,
     };
   }
   render() {
