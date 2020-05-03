@@ -4,7 +4,8 @@ import Dashboard from "./Dashboard";
 import Test from "./components/Test";
 import NewGoals from "./components/FinancingGoals";
 import TrackingGoals from "./components/TrackingGoals";
-import Goals from "./components/FinancialGoals";
+import FinancialGoals from "./components/FinancialGoals";
+import FinancingGoals from "./components/FinancingGoals";
 import TrackGoals from "./components/TrackGoals";
 import Signup from "./components/Signup";
 import DetailFinances from "./components/DetailFinances";
@@ -21,7 +22,8 @@ function App() {
           <Route path='/' exact component={Login} />
           <Route path='/dashboard' exact component={Dashboard} />
           <Route path='/expenses' exact component={Test} />
-          <Route path='/goals' exact component={Goals} />
+          <Route path='/financialgoals' exact component={FinancialGoals} />
+          <Route path='/financinggoals' exact component={FinancingGoals} />
           <Route path='/newgoals' exact component={NewGoals} />
           <Route path='/trackGoals' exact component={TrackGoals} />
           <Route path='/trackingGoals' exact component={TrackingGoals} />

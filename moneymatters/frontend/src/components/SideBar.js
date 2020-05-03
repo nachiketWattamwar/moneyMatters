@@ -24,12 +24,12 @@ class SideBar extends React.Component {
     let url = null;
     let reportsUrl = null;
     if (this.props.email == "nikhil@yahoo.co.in") {
-      url = "/goals";
+      url = "/financialgoals";
       reportsUrl = "/detailFinances";
       console.log("email id is ", this.props.email);
       console.log("url is ", url);
     } else {
-      url = "/newgoals";
+      url = "/financinggoals";
       reportsUrl = null;
       console.log("email id is ", this.props.email);
       console.log("url is ", url);
