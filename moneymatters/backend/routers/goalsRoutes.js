@@ -5,7 +5,7 @@ const { spawn } = require("child_process");
 const Goal = require("../models/goal");
 const uservalidity = require("../middleware/uservalidity");
 
-router.post("/goals", uservalidity, async (req, res) => {
+router.post("/goals", async (req, res) => {
   const goalObj = new Goal(req.body);
   try {
     await goalObj.save();
@@ -50,6 +50,7 @@ router.patch("/goals/:id", async (req, res) => {
   }
 
   try {
+    //console.log("inside goals update param", req.params);
     const goalObj = await Goal.findById(req.params.id);
 
     updates.forEach((update) => {
@@ -70,7 +71,7 @@ router.delete("/goals/:id", async (req, res) => {
     if (!goalObj) {
       return res.status(404).send("Invalid deletion request");
     }
-
+    console.log("inside delete backend", goalObj);
     res.send(goalObj);
   } catch (e) {
     res.status(500).send();

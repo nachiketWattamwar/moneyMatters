@@ -120,7 +120,7 @@ class FinancingGoals extends Component {
     };
     console.log("=====inside financing goals email ", expenseData);
     axios.post(`http://${URL}/allgoals`, expenseData).then((res) => {
-      console.log("after axios call ", res.data);
+      //console.log("after axios call ", res.data);
       //newData.id = res.data._id;
       //let temp = this.state.data.concat(newData);
       this.setState({
@@ -156,7 +156,7 @@ class FinancingGoals extends Component {
                       onClick: (event, rowData) =>
                         this.props.history.push({
                           pathname: "/trackingGoals",
-                          search: "?goalId=" + rowData.id,
+                          search: "?goalId=" + rowData._id,
                           state: { rowData },
                         }),
                     },
@@ -169,7 +169,7 @@ class FinancingGoals extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-                          newData.id = this.state.data.length + 1;
+                          newData._id = this.state.data.length + 1;
                           let temp = this.state.data.concat(newData);
                           this.setState({
                             data: temp,
@@ -181,11 +181,6 @@ class FinancingGoals extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-                          // newData.id = this.state.data.length + 1;
-                          // let temp = this.state.data.concat(newData);
-                          // this.setState({
-                          //   data: temp,
-                          // });
                           //call to the backend
                           console.log("newData is ", newData);
                           const expenseData = {
@@ -200,12 +195,21 @@ class FinancingGoals extends Component {
                           axios
                             .post(`http://${URL}/goals`, expenseData)
                             .then((res) => {
-                              console.log("after axios call ", res.data);
-                              newData.id = res.data._id;
-                              let temp = this.state.data.concat(newData);
-                              this.setState({
-                                data: temp,
-                              });
+                              //console.log("after axios call ", res.data);
+                              const emailID = {
+                                email: this.props.email.email, //done
+                              };
+                              axios
+                                .post(`http://${URL}/allgoals`, emailID)
+                                .then((res) => {
+                                  console.log(
+                                    "after adding new data ",
+                                    res.data
+                                  );
+                                  this.setState({
+                                    data: res.data,
+                                  });
+                                });
                             });
                         }, 600);
                       }),
@@ -213,15 +217,36 @@ class FinancingGoals extends Component {
                       new Promise((resolve) => {
                         setTimeout(() => {
                           resolve();
-                          let id = oldData.id;
-                          let dataCopy = this.state.data;
-                          let temp = dataCopy.map((obj) =>
-                            obj.id == id ? newData : obj
-                          );
-                          this.setState({
-                            data: temp,
-                          });
+
                           //call to the backend
+                          const updatedGoal = {
+                            name: newData.name,
+                            amount: newData.amount,
+                            startdate: newData.startdate,
+                            enddate: newData.enddate,
+                          };
+                          axios
+                            .patch(
+                              `http://${URL}/goals/${oldData._id}`,
+                              updatedGoal
+                            )
+                            .then((res) => {
+                              console.log(
+                                "on updated method, goals ",
+                                res.data
+                              );
+                              const emailID = {
+                                email: this.props.email.email, //done
+                              };
+
+                              axios
+                                .post(`http://${URL}/allgoals`, emailID)
+                                .then((res) => {
+                                  this.setState({
+                                    data: res.data,
+                                  });
+                                });
+                            });
                         }, 600);
                       }),
                     onRowDelete: (oldData) =>
@@ -229,13 +254,19 @@ class FinancingGoals extends Component {
                         setTimeout(() => {
                           resolve();
                           console.log("inside delete", oldData);
-                          let temp = this.state.data;
-                          temp = temp.filter((d) => d.id !== oldData.id);
-                          console.log("newData ", temp);
-                          this.setState({
-                            data: temp,
-                          });
+
                           //call to the backend
+                          axios
+                            .delete(`http://${URL}/goals/${oldData._id}`)
+                            .then((res) => {
+                              axios
+                                .post(`http://${URL}/allgoals`)
+                                .then((res) => {
+                                  this.setState({
+                                    data: res.data,
+                                  });
+                                });
+                            });
                         }, 600);
                       }),
                   }}
